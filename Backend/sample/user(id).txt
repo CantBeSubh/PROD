@@ -1,0 +1,6 @@
+{
+  user(id:"629b6eba01c01cd9b7d7dc7d"){
+    name,
+    username
+  }
+}

@@ -1,6 +1,6 @@
 const express=require("express")
 const {graphqlHTTP}=require('express-graphql')
-const schema=require('./scheme/schema')
+const schema=require('./gql/schema')
 const mongoose=require('mongoose')
 const cors=require('cors')
 const dotenv=require('dotenv')

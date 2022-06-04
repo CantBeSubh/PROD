@@ -1,0 +1,12 @@
+mutation{
+  addUser(
+    name:"Kailash Pulpati",
+    email:"kailashpp@gmail.com",
+    username:"kpHoeless",
+    password:"f7a9c6c7c6f8b31276ff04478c8d823d"
+  ){
+    id,
+    name,
+    username
+  }
+}

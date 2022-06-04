@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for PROD",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "clear",
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.5.0",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.3.4",
+    "mongoose-validator": "^2.1.0"
+  },
+  "author": "HolyCow",
+  "license": "ISC"
+}

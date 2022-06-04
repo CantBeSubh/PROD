@@ -115,12 +115,30 @@ const delHabit={
     resolve:(parent,args)=>Habit.findByIdAndDelete(args.id)
 }
 
+const updateHabit={
+    type:HabitType,
+    args:{
+        id:{type:GraphQLID},
+        name:{type:GraphQLString},
+        up:{type:GraphQLInt},
+        down:{type:GraphQLInt}
+    },
+    resolve:(parent,args)=>{
+        return Habit.findByIdAndUpdate(args.id,{
+            name:args.name?parent.name:args.name,
+            up:args.up?parent.up:args.up,
+            down:args.down?parent.down:args.down
+        })
+    }
+}
+
 const Mutation=new GraphQLObjectType({
     name:'Mutation',
     fields:{
         addUser,
         addHabit,
-        delHabit
+        delHabit,
+        updateHabit
     }
 })
 

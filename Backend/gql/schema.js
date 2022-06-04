@@ -1,3 +1,4 @@
+//MODULES
 const graphql=require('graphql')
 const User = require('../model/user')
 const Habit = require('../model/habit')
@@ -12,6 +13,8 @@ const {
     GraphQLInt
 }=graphql
 
+
+//TYPES
 const UserType=new GraphQLObjectType({
     name:'User',
     fields:()=>({
@@ -42,8 +45,10 @@ const HabitType=new GraphQLObjectType({
     })
 })
 
+
+//QUERY
 const RootQuery=new GraphQLObjectType({
-    name:'RootQueryType',
+    name:'RootQuery',
     fields:{
         user:{
             type:UserType,
@@ -66,46 +71,56 @@ const RootQuery=new GraphQLObjectType({
     }
 })
 
+//MUTATION
+const addUser={
+    type:UserType,
+    args:{
+        name:{type:new GraphQLNonNull(GraphQLString)},
+        username:{type:new GraphQLNonNull(GraphQLString)},
+        email:{type:new GraphQLNonNull(GraphQLString)},
+        password:{type:new GraphQLNonNull(GraphQLString)}
+    },
+    resolve(parent,args){
+        let user=new User({
+            name:args.name,
+            username:args.username,
+            email:args.email,
+            password:args.password
+        })
+        return user.save()
+    }
+}
+
+const addHabit={
+    type:HabitType,
+    args:{
+        uid:{type:new GraphQLNonNull(GraphQLString)},
+        name:{type:new GraphQLNonNull(GraphQLString)},
+        up:{type:GraphQLInt},
+        down:{type:GraphQLInt}
+    },
+    resolve(parent,args){
+        let habit=new Habit({
+            uid:args.uid,
+            name:args.name,
+            up:args.up,
+            down:args.down
+        })
+        return habit.save()
+    }
+}
+const delHabit={
+    type:HabitType,
+    args:{id:{type:GraphQLID}},
+    resolve:(parent,args)=>Habit.findByIdAndDelete(args.id)
+}
 
 const Mutation=new GraphQLObjectType({
     name:'Mutation',
     fields:{
-        addUser:{
-            type:UserType,
-            args:{
-                name:{type:new GraphQLNonNull(GraphQLString)},
-                username:{type:new GraphQLNonNull(GraphQLString)},
-                email:{type:new GraphQLNonNull(GraphQLString)},
-                password:{type:new GraphQLNonNull(GraphQLString)}
-            },
-            resolve(parent,args){
-                let user=new User({
-                    name:args.name,
-                    username:args.username,
-                    email:args.email,
-                    password:args.password
-                })
-                return user.save()
-            }
-        },
-        addHabit:{
-            type:HabitType,
-            args:{
-                uid:{type:new GraphQLNonNull(GraphQLString)},
-                name:{type:new GraphQLNonNull(GraphQLString)},
-                up:{type:GraphQLInt},
-                down:{type:GraphQLInt}
-            },
-            resolve(parent,args){
-                let habit=new Habit({
-                    uid:args.uid,
-                    name:args.name,
-                    up:args.up,
-                    down:args.down
-                })
-                return habit.save()
-            }
-        }
+        addUser,
+        addHabit,
+        delHabit
     }
 })
 

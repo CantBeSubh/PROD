@@ -2,6 +2,7 @@
 const graphql=require('graphql')
 const User = require('../model/user')
 const Habit = require('../model/habit')
+const Todo=require('../model/todo')
 
 const {
     GraphQLObjectType,
@@ -10,7 +11,8 @@ const {
     GraphQLID,
     GraphQLList,
     GraphQLNonNull,
-    GraphQLInt
+    GraphQLInt,
+    GraphQLBoolean
 }=graphql
 
 
@@ -45,6 +47,20 @@ const HabitType=new GraphQLObjectType({
     })
 })
 
+const TodoType=new GraphQLObjectType({
+    name:'Todo',
+    fields:()=>({
+        id:{type:GraphQLID},
+        uid:{type:GraphQLString},
+        name:{type:GraphQLString},
+        check:{type:GraphQLBoolean},
+        user:{
+            type:UserType,
+            resolve:(parent,args)=>User.findById(parent.uid)
+        }
+    })
+})
+
 
 //QUERY
 const RootQuery=new GraphQLObjectType({
@@ -67,7 +83,17 @@ const RootQuery=new GraphQLObjectType({
         habits:{
             type:new GraphQLList(HabitType),
             resolve:(parent,args)=>Habit.find()
+        },
+        todo:{
+            type:TodoType,
+            args:{id:{type:GraphQLID}},
+            resolve:(parent,args)=>Todo.findById(args.id)
+        },
+        todos:{
+            type:new GraphQLList(TodoType),
+            resolve:(parent,args)=>Todo.find()
         }
+
     }
 })
 
@@ -159,6 +185,44 @@ const updateHabit={
     }
 }
 
+const addTodo={
+    type:TodoType,
+    args:{
+        uid:{type:new GraphQLNonNull(GraphQLString)},
+        name:{type:new GraphQLNonNull(GraphQLString)},
+        check:{type:GraphQLBoolean}
+    },
+    resolve(parent,args){
+        let todo=new Todo({
+            uid:args.uid,
+            name:args.name,
+            check:args.check?false:args.check
+        })
+
+        return todo.save()
+    }
+}
+
+const delTodo={
+    type:TodoType,
+    args:{
+        id:{type:new GraphQLNonNull(GraphQLID)}
+    },
+    resolve:(parent,args)=>Todo.findByIdAndDelete(args.id)
+}
+
+const updateTodo={
+    type:TodoType,
+    args:{
+        name:GraphQLString,
+        check:GraphQLBoolean
+    },
+    resolve:(parent,args)=>Todo.findByIdAndUpdate(args.id,{
+        name:args.name?parent.name:args.name,
+        check:args.check?parent.check:args.check
+    })
+}
+
 const Mutation=new GraphQLObjectType({
     name:'Mutation',
     fields:{
@@ -167,7 +231,10 @@ const Mutation=new GraphQLObjectType({
         updateUser,
         addHabit,
         delHabit,
-        updateHabit
+        updateHabit,
+        addTodo,
+        delTodo,
+        updateTodo
     }
 })
 

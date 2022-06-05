@@ -91,6 +91,33 @@ const addUser={
     }
 }
 
+const delUser={
+    type:UserType,
+    args:{
+        id:{type: new GraphQLNonNull(GraphQLID)}
+    },
+    resolve:(parent,args)=>User.findByIdAndDelete(args.id)
+}
+
+const updateUser={
+    type:UserType,
+    args:{
+        id:{type: new GraphQLNonNull(GraphQLID)},
+        name:{type:GraphQLString},
+        username:{type:GraphQLString},
+        email:{type:GraphQLString},
+        password:{type:GraphQLString}
+    },
+    resolve(parent,args){
+        return User.findByIdAndUpdate(args.id,{
+            name:args.name?parent.name:args.name,
+            username:args.username?parent.username:args.username,
+            email:args.email?parent.email:args.email,
+            password:args.password?parent.password:args.password,
+        })
+    }
+}
+
 const addHabit={
     type:HabitType,
     args:{
@@ -136,6 +163,8 @@ const Mutation=new GraphQLObjectType({
     name:'Mutation',
     fields:{
         addUser,
+        delUser,
+        updateUser,
         addHabit,
         delHabit,
         updateHabit

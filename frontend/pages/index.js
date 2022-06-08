@@ -12,16 +12,17 @@ const LOCAL_STORAGE_KEY='prod-habits'
 export default function Home() {
   const [habits, setHabits] = useState([]);
 
-  // useEffect(()=>{
-  //   let storageHabits=JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-  //   if(storageHabits){
-  //     setHabits(storageHabits)
-  //   }
-  // },[])
+  useEffect(()=>{
+    let storageHabits=JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    if(storageHabits.length>0){
+      setHabits(storageHabits)
+    }
+  },[])
 
-  // useEffect(()=>{
-  //   localStorage.setItem(LOCAL_STORAGE_KEY,habits)
-  // },[habits])
+  useEffect(()=>{
+    localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(habits))
+    console.table(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)))
+  },[habits])
 
   const addHabit=(habit)=>{
     setHabits([habit, ...habits])

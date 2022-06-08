@@ -234,7 +234,7 @@ const Mutation=new GraphQLObjectType({
         updateHabit,
         addTodo,
         delTodo,
-        updateTodo
+        // updateTodo
     }
 })
 

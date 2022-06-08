@@ -56,7 +56,7 @@ export default function Home() {
   }
 
   const removeHabit=(id)=> {
-    setHabits(habits.filter(habit => todo.id !== id));
+    setHabits(habits.filter(habit => habit.id !== id));
   }
 
   return (
@@ -66,6 +66,7 @@ export default function Home() {
       habits={habits} 
       upHabit={upHabit}
       downHabit={downHabit}
+      removeHabit={removeHabit}
       />
     </div>
   )

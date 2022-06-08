@@ -1,6 +1,6 @@
 import Habit from "./Habit"
 
-const HabitList = ({habits,upHabit,downHabit}) => {
+const HabitList = ({habits,upHabit,downHabit,removeHabit}) => {
   return (
     <ul>
       {habits.map(habit=>
@@ -9,6 +9,7 @@ const HabitList = ({habits,upHabit,downHabit}) => {
         habit={habit}
         upHabit={upHabit}
         downHabit={downHabit}
+        removeHabit={removeHabit}
         />      
         )}
     </ul>

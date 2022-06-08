@@ -1,9 +1,14 @@
-const Habit = ({habit,upHabit,downHabit}) => {
+const Habit = ({habit,upHabit,downHabit,removeHabit}) => {
+  const handleUp=(id)=>{
+    upHabit(id)
+  }
+  
   return (
       <li>
-        {habit.name} | {habit.up} | {habit.down} 
-        <button onChange={()=>upHabit(habit.id)}> + </button>
-        <button onChange={()=>downHabit(habit.id)}> - </button>
+        {habit.name} | {habit.up} | -{habit.down} 
+        <button onClick={()=>handleUp(habit.id)}> + </button>
+        <button onClick={()=>downHabit(habit.id)}> - </button>
+        <button onClick={()=>removeHabit(habit.id)}> X </button>
       </li>
   )
 }

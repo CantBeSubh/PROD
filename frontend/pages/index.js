@@ -1,5 +1,6 @@
 import {useState,useEffect} from 'react'
-
+import client from '../comps/apollo-client'
+import { gql } from '@apollo/client'
 
 import styles from '../styles/Home.module.css'
 
@@ -8,10 +9,27 @@ import HabitList from '../comps/HabitList'
 
 const LOCAL_STORAGE_KEY='prod-habits'
 
+//Apollo
+export const getStaticProps=async()=>{
+  const { data } = await client.query({
+    query: gql`
+      {
+        users{
+          name
+        }
+      }
+    `
+  });
+  return {
+    props: {
+      data
+    }
+ }
+}
 
 
-
-export default function Home() {
+export default function Home({data}) {
+  // console.log(data)
   const [habits, setHabits] = useState([]);
 
   useEffect(()=>{

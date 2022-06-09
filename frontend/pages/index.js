@@ -1,13 +1,15 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import {useState,useEffect} from 'react'
+
 
 import styles from '../styles/Home.module.css'
 
-import HabitForm from './comps/HabitForm'
-import HabitList from './comps/HabitList'
+import HabitForm from '../comps/HabitForm'
+import HabitList from '../comps/HabitList'
 
 const LOCAL_STORAGE_KEY='prod-habits'
+
+
+
 
 export default function Home() {
   const [habits, setHabits] = useState([]);
@@ -21,7 +23,6 @@ export default function Home() {
 
   useEffect(()=>{
     localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(habits))
-    console.table(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)))
   },[habits])
 
   const addHabit=(habit)=>{

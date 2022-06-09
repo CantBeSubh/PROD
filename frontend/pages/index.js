@@ -1,8 +1,7 @@
 import {useState,useEffect} from 'react'
 
 import client from '../gql/apollo-client'
-import { gql } from '@apollo/client'
-import {getHabits} from '../gql/queries'
+import {getHabitsQ} from '../gql/queries'
 
 import styles from '../styles/Home.module.css'
 
@@ -13,7 +12,7 @@ import HabitList from '../comps/HabitList'
 
 //Apollo
 export const getStaticProps=async()=>{
-  const { data } = await client.query({query: getHabits})
+  const { data } = await client.query({query: getHabitsQ})
   return {props: {data}}
 }
 

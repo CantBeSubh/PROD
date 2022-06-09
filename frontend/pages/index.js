@@ -1,47 +1,36 @@
 import {useState,useEffect} from 'react'
-import client from '../comps/apollo-client'
+
+import client from '../gql/apollo-client'
 import { gql } from '@apollo/client'
+import {getHabits} from '../gql/queries'
 
 import styles from '../styles/Home.module.css'
 
 import HabitForm from '../comps/HabitForm'
 import HabitList from '../comps/HabitList'
 
-const LOCAL_STORAGE_KEY='prod-habits'
+// const LOCAL_STORAGE_KEY='prod-habits'
 
 //Apollo
 export const getStaticProps=async()=>{
-  const { data } = await client.query({
-    query: gql`
-      {
-        users{
-          name
-        }
-      }
-    `
-  });
-  return {
-    props: {
-      data
-    }
- }
+  const { data } = await client.query({query: getHabits})
+  return {props: {data}}
 }
 
-
 export default function Home({data}) {
-  // console.log(data)
-  const [habits, setHabits] = useState([]);
+  // console.table(data.habits)
+  const [habits, setHabits] = useState(data.habits);
 
-  useEffect(()=>{
-    let storageHabits=JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-    if(storageHabits.length>0){
-      setHabits(storageHabits)
-    }
-  },[])
+  // useEffect(()=>{
+  //   let storageHabits=JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+  //   if(storageHabits.length>0){
+  //     setHabits(storageHabits)
+  //   }
+  // },[])
 
-  useEffect(()=>{
-    localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(habits))
-  },[habits])
+  // useEffect(()=>{
+  //   localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(habits))
+  // },[habits])
 
   const addHabit=(habit)=>{
     setHabits([habit, ...habits])

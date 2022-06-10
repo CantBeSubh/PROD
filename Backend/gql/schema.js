@@ -36,7 +36,7 @@ const HabitType=new GraphQLObjectType({
     name:'Habit',
     fields:()=>({
         id:{type:GraphQLID},
-        uid:{type:GraphQLString},
+        uid:{type:GraphQLID},
         name:{type:GraphQLString},
         up:{type:GraphQLInt},
         down:{type:GraphQLInt},
@@ -147,17 +147,13 @@ const updateUser={
 const addHabit={
     type:HabitType,
     args:{
-        uid:{type:new GraphQLNonNull(GraphQLString)},
+        uid:{type:new GraphQLNonNull(GraphQLID)},
         name:{type:new GraphQLNonNull(GraphQLString)},
-        up:{type:GraphQLInt},
-        down:{type:GraphQLInt}
     },
     resolve(parent,args){
         let habit=new Habit({
             uid:args.uid,
-            name:args.name,
-            up:args.up,
-            down:args.down
+            name:args.name
         })
         return habit.save()
     }
@@ -178,10 +174,11 @@ const updateHabit={
     },
     resolve:(parent,args)=>{
         return Habit.findByIdAndUpdate(args.id,{
-            name:args.name?parent.name:args.name,
-            up:args.up?parent.up:args.up,
-            down:args.down?parent.down:args.down
+            name:args.name,
+            up:args.up,
+            down:args.down
         })
+        
     }
 }
 

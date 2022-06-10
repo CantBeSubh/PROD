@@ -8,7 +8,7 @@ import styles from '../styles/Home.module.css'
 import HabitForm from '../comps/HabitForm'
 import HabitList from '../comps/HabitList'
 
-// const LOCAL_STORAGE_KEY='prod-habits'
+const LOCAL_STORAGE_KEY='prod-habits'
 
 //Apollo
 export const getStaticProps=async()=>{

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { addHabitM, getHabitsQ } from '../queries'
+import { addHabitM, getHabitsQ } from '../../queries'
 
 const HabitForm = () => {
   const [habit,setHabit]=useState({
@@ -13,7 +13,7 @@ const HabitForm = () => {
     if (status.loading) return 'Submitting...'
     if (status.error) return `Submission error! ${status.error.message}`
     e.preventDefault()
-    addHabit({variables:{name:habit.name,uid:habit.uid}})
+    addHabit({variables:habit})
     setHabit({...habit,name:''})
   }
 

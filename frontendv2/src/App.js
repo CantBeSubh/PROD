@@ -3,8 +3,8 @@ import {useQuery} from '@apollo/client'
 
 import './App.css';
 
-import HabitForm from './comps/HabitForm'
-import HabitList from './comps/HabitList'
+import HabitForm from './comps/Habits/HabitForm'
+import HabitList from './comps/Habits/HabitList'
 
 import {getHabitsQ} from './queries'
 

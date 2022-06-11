@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client"
-import { delHabitM, getHabitsQ,updateHabitM } from "../queries"
+import { delHabitM, getHabitsQ,updateHabitM } from "../../queries"
 const Habit = ({habit}) => {
   const [delHabit,status]=useMutation(delHabitM,{refetchQueries:[{query:getHabitsQ}]})
   const [updateHabit,status2]=useMutation(updateHabitM,{refetchQueries:[{query:getHabitsQ}]})

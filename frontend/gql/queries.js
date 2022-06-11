@@ -66,6 +66,18 @@ mutation($id:ID!,$name:String,$check:Boolean){
 }
 `
 
+//User
+const loginQ=gql`
+query($email:String!,$password:String!){
+  login(email:$email,password:$password){
+    status
+    id
+    token
+  }
+}
+`
+
+
 export {
     getHabitsQ,
     addHabitM,
@@ -74,5 +86,6 @@ export {
     getTodosQ,
     addTodoM,
     delTodoM,
-    updateTodoM
+    updateTodoM,
+    loginQ
 }

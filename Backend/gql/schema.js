@@ -120,7 +120,7 @@ const RootQuery=new GraphQLObjectType({
             resolve:async (parent,args)=>{
                 const user= await User.find({email:args.email}).select('+password')
                 if(!user[0] || !(await compare(args.password,user[0].password))){
-                    return {status:'Not found/Invalid email or password',id:'',token:''}
+                    return {status:'Not found/Invalid email or password',id:null,token:null}
                 }
                 const token=jwt.sign({id:user[0].id},process.env.JWT_SECRET,{
                     expiresIn:process.env.JWT_EXP_TIME

@@ -1,5 +1,6 @@
 import {gql} from "@apollo/client";
 
+//Habit
 const getHabitsQ = gql`
   {
       habits{
@@ -11,72 +12,67 @@ const getHabitsQ = gql`
   }
 `
 const addHabitM=gql`
-mutation($name:String!,$up:Number,$down:Number,$uid:ID!){
-  addBook(name:$name,up:$up,down:$down,uid:$uid){
+mutation($name:String!,$uid:ID!){
+  addHabit(name:$name,uid:$uid){
     name
-    up
-    down
   }
 }
 `
-
-const getBookQuery = gql`
-  query GetBook($id: ID){
-    book(id: $id) {
-      id
+const delHabitM=gql`
+  mutation($id:ID){
+    delHabit(id:$id){
       name
-      genre
-      author {
-        id
-        name
-        age
-        books {
-          name
-          id
-        }
-      }
     }
   }
+`
+const updateHabitM=gql`
+mutation($id:ID!,$name:String,$up:Int,$down:Int){
+  updateHabit(id:$id,name:$name,up:$up,down:$down){
+    name
+  }
+}
+`
+//.Todo
+const getTodosQ=gql`
+{
+  todos{
+    name
+    id
+    check
+  }
+}
+`
+const addTodoM=gql`
+mutation($uid:ID!,$name:String!){
+  addTodo(name:$name,uid:$uid){
+    name
+    id
+    check
+  }
+}
+`
+const delTodoM=gql`
+mutation($id:ID!){
+  delTodo(id:$id){
+    name
+  }
+}
+`
+const updateTodoM=gql`
+mutation($id:ID!,$name:String,$check:Boolean){
+  updateTodo(id: $id,name: $name,check: $check){
+    name
+  }
+}
 `
 
 export {
     getHabitsQ,
-    addHabitM
+    addHabitM,
+    delHabitM,
+    updateHabitM,
+    getTodosQ,
+    addTodoM,
+    delTodoM,
+    updateTodoM
 }
-
-
-// const addHabit=(habit)=>{
-//     setHabits([habit, ...habits])
-//   }
-
-//   const upHabit=(id)=>{
-//     setHabits(
-//       habits.map(habit => {
-//         if (habit.id === id) {
-//           return {
-//             ...habit,
-//             up: habit.up+1
-//           };
-//         }
-//         return habit;
-//       })
-//     );
-//   }
-
-//   const downHabit=(id)=>{
-//     setHabits(
-//       habits.map(habit => {
-//         if (habit.id === id) {
-//           return {
-//             ...habit,
-//             down: habit.down+1
-//           };
-//         }
-//         return habit;
-//       })
-//     );
-//   }
-
-//   const removeHabit=(id)=> {
-//     setHabits(habits.filter(habit => habit.id !== id));
-//   }

@@ -1,81 +1,37 @@
 import {useState,useEffect} from 'react'
+import {useQuery} from '@apollo/client'
+import Head from 'next/head'
+import HabitForm from '../components/Habits/HabitForm'
+import HabitList from '../components/Habits/HabitList'
+import TodoForm from '../components/Todos/TodoForm'
+import TodoList from '../components/Todos/TodoList'
 
-import client from '../gql/apollo-client'
-import {getHabitsQ} from '../gql/queries'
+import {getHabitsQ,getTodosQ} from '../gql/queries'
 
-import styles from '../styles/Home.module.css'
+function App() {
+  const [habits, setHabits] = useState([])
+  const [todos,setTodos]=useState([])
+  const getHabits = useQuery(getHabitsQ)
+  const getTodos = useQuery(getTodosQ)
 
-import HabitForm from '../comps/HabitForm'
-import HabitList from '../comps/HabitList'
-
-const LOCAL_STORAGE_KEY='prod-habits'
-
-//Apollo
-export const getStaticProps=async()=>{
-  const { data } = await client.query({query: getHabitsQ})
-  return {props: {data}}
-}
-
-export default function Home({data}) {
-  // console.table(data.habits)
-  const [habits, setHabits] = useState(data.habits);
-
-  // useEffect(()=>{
-  //   let storageHabits=JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-  //   if(storageHabits.length>0){
-  //     setHabits(storageHabits)
-  //   }
-  // },[])
-
-  // useEffect(()=>{
-  //   localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(habits))
-  // },[habits])
-
-  const addHabit=(habit)=>{
-    setHabits([habit, ...habits])
-  }
-
-  const upHabit=(id)=>{
-    setHabits(
-      habits.map(habit => {
-        if (habit.id === id) {
-          return {
-            ...habit,
-            up: habit.up+1
-          };
-        }
-        return habit;
-      })
-    );
-  }
-
-  const downHabit=(id)=>{
-    setHabits(
-      habits.map(habit => {
-        if (habit.id === id) {
-          return {
-            ...habit,
-            down: habit.down+1
-          };
-        }
-        return habit;
-      })
-    );
-  }
-
-  const removeHabit=(id)=> {
-    setHabits(habits.filter(habit => habit.id !== id));
-  }
+  useEffect(()=>{
+    if(getHabits.data) setHabits(getHabits.data.habits);
+    if(getTodos.data) setTodos(getTodos.data.todos);
+  },[getHabits,getTodos])
 
   return (
-    <div>
-      <HabitForm addHabit={addHabit}/>
-      <HabitList 
-      habits={habits} 
-      upHabit={upHabit}
-      downHabit={downHabit}
-      removeHabit={removeHabit}
-      />
-    </div>
+    <>
+      <Head>
+        <title>PROD</title>
+      </Head>
+      <div className="App">
+        Habit: <HabitForm />
+        Todo: <TodoForm/>
+        <HabitList habits={habits} />
+        <TodoList todos={todos}/>
+      </div>
+    </>
   )
 }
+
+export default App;

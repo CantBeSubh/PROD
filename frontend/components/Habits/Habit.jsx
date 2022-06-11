@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client"
 import { delHabitM, getHabitsQ,updateHabitM } from "../../gql/queries"
 const Habit = ({habit}) => {
-  const [delHabit,status]=useMutation(delHabitM,{refetchQueries:[{query:getHabitsQ}]})
-  const [updateHabit,status2]=useMutation(updateHabitM,{refetchQueries:[{query:getHabitsQ}]})
+  const [delHabit,status]=useMutation(delHabitM,{refetchQueries:[{query:getHabitsQ},'GetHabits']})
+  const [updateHabit,status2]=useMutation(updateHabitM,{refetchQueries:[{query:getHabitsQ},'GetHabits']})
 
   const handleUp=()=>{
     if (status2.loading) return 'Submitting...'

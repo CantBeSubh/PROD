@@ -2,8 +2,8 @@ import {gql} from "@apollo/client";
 
 //Habit
 const getHabitsQ = gql`
-  {
-      habits{
+  query GetHabits($uid:ID){
+      habits(uid:$uid){
           id
           name
           up
@@ -34,8 +34,8 @@ mutation($id:ID!,$name:String,$up:Int,$down:Int){
 `
 //.Todo
 const getTodosQ=gql`
-{
-  todos{
+query GetTodos($uid:ID){
+  todos(uid:$uid){
     name
     id
     check

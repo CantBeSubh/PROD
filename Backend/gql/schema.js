@@ -100,7 +100,8 @@ const RootQuery=new GraphQLObjectType({
         },
         habits:{
             type:new GraphQLList(HabitType),
-            resolve:(parent,args)=>Habit.find()
+            args:{uid:{type:GraphQLID}},
+            resolve:(parent,args)=>Habit.find({uid:args.uid})
         },
         todo:{
             type:TodoType,
@@ -109,7 +110,8 @@ const RootQuery=new GraphQLObjectType({
         },
         todos:{
             type:new GraphQLList(TodoType),
-            resolve:(parent,args)=>Todo.find()
+            args:{uid:{type:GraphQLID}},
+            resolve:(parent,args)=>Todo.find({uid:args.uid})
         },
         login:{
             type:LoginType,

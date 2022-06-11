@@ -1,17 +1,24 @@
 import { useQuery } from "@apollo/client"
 import { useState } from "react"
+import { useRouter } from 'next/router';
 import { loginQ } from "../../gql/queries"
 
 const index = () => {
     const [state,setState]=useState({email:'',password:''})
     const {loading,error,data}=useQuery(loginQ,{variables:state})
-
+    const router = useRouter()
     const handleSubmit=e=>{
-        if (loading) return;
-        if (error) return;
+        if (loading) return <p>LOADING...</p>;
+        if (error) return <p>ERROR</p>;
 
         e.preventDefault()
-        console.log(data)
+        const {id,token,status}=data.login
+        if(status==='Found'){
+            localStorage.setItem('id',id)
+            localStorage.setItem('jwt',token)
+        }
+        setTimeout(()=>router.push('/'),100)
+        
     }
     return (
         <form onSubmit={handleSubmit}>

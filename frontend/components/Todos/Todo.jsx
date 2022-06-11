@@ -2,8 +2,8 @@ import { useMutation } from "@apollo/client"
 import { delTodoM, getTodosQ,updateTodoM } from "../../gql/queries"
 
 const Todo = ({todo}) => {
-  const [delTodo,status]=useMutation(delTodoM,{refetchQueries:[{query:getTodosQ}]})
-  const [updateTodo,status2]=useMutation(updateTodoM,{refetchQueries:[{query:getTodosQ}]})
+  const [delTodo,status]=useMutation(delTodoM,{refetchQueries:[{query:getTodosQ},'GetTodos']})
+  const [updateTodo,status2]=useMutation(updateTodoM,{refetchQueries:[{query:getTodosQ},'GetTodos']})
 
   const handleComplete=()=>{
     if (status2.loading) return 'Submitting...'

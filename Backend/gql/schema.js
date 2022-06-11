@@ -185,15 +185,14 @@ const updateHabit={
 const addTodo={
     type:TodoType,
     args:{
-        uid:{type:new GraphQLNonNull(GraphQLString)},
+        uid:{type:new GraphQLNonNull(GraphQLID)},
         name:{type:new GraphQLNonNull(GraphQLString)},
-        check:{type:GraphQLBoolean}
     },
     resolve(parent,args){
         let todo=new Todo({
             uid:args.uid,
             name:args.name,
-            check:args.check?false:args.check
+            check:false
         })
 
         return todo.save()
@@ -211,12 +210,13 @@ const delTodo={
 const updateTodo={
     type:TodoType,
     args:{
-        name:GraphQLString,
-        check:GraphQLBoolean
+        id:{type:new GraphQLNonNull(GraphQLID)},
+        name:{type:GraphQLString},
+        check:{type:GraphQLBoolean}
     },
     resolve:(parent,args)=>Todo.findByIdAndUpdate(args.id,{
-        name:args.name?parent.name:args.name,
-        check:args.check?parent.check:args.check
+        name:args.name,
+        check:args.check
     })
 }
 
@@ -231,7 +231,7 @@ const Mutation=new GraphQLObjectType({
         updateHabit,
         addTodo,
         delTodo,
-        // updateTodo
+        updateTodo
     }
 })
 

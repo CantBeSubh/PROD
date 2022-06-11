@@ -5,27 +5,34 @@ import './App.css';
 
 import HabitForm from './comps/Habits/HabitForm'
 import HabitList from './comps/Habits/HabitList'
+import TodoForm from './comps/Todos/TodoForm'
+import TodoList from './comps/Todos/TodoList'
 
-import {getHabitsQ} from './queries'
+import {getHabitsQ,getTodosQ} from './queries'
 
 // const LOCAL_STORAGE_KEY='prod-habits'
 
 function App() {
-  const [habits, setHabits] = useState([]);
-  const { data } = useQuery(getHabitsQ);
-  
+  const [habits, setHabits] = useState([])
+  const [todos,setTodos]=useState([])
+  const getHabits = useQuery(getHabitsQ)
+  const getTodos = useQuery(getTodosQ)
+
   useEffect(()=>{
-    if(data){
-      setHabits(data.habits)
+    if(getHabits.data){
+      setHabits(getHabits.data.habits)
     }
-  },[data])
+    if(getTodos.data){
+      setTodos(getTodos.data.todos)
+    }
+  },[getHabits,getTodos])
 
   return (
     <div className="App">
       <HabitForm />
-      <HabitList 
-      habits={habits} 
-      />
+      <TodoForm/>
+      <HabitList habits={habits} />
+      <TodoList todos={todos}/>
     </div>
   );
 }

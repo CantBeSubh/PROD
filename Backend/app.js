@@ -3,7 +3,9 @@ const {graphqlHTTP}=require('express-graphql')
 const schema=require('./gql/schema')
 const mongoose=require('mongoose')
 const cors=require('cors')
+const morgan = require('morgan')
 const dotenv=require('dotenv')
+
 
 dotenv.config('.env')
 
@@ -21,7 +23,9 @@ const connectToDB=()=>{
 const app=express()
 const port=process.env.PORT
 
+
 app
+    .use(morgan('dev'))
     .use(cors())
     .use('/graphql',graphqlHTTP({schema,graphiql:true}))
     .listen(port,()=>{console.log(`[+] Server stated at port: ${port}`);connectToDB()})

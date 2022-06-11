@@ -1,0 +1,10 @@
+{
+  login(
+    email:"ishaan@weeb.com"
+  	password:"iLoveMeenkashi123"
+  ){
+    status
+    id
+    token
+  }
+}

@@ -10,3 +10,18 @@ mutation{
     username
   }
 }
+
+mutation{
+  addUser(
+    name:"Ishaan"
+    email:"ishaan@weeb.com"
+    password:"iLoveMeenkashi123"
+    username:"anonymous_killer"
+  ){
+    name
+    id
+    password
+    email
+    username
+  }
+}

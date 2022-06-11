@@ -1,9 +1,14 @@
 //MODULES
 const graphql=require('graphql')
-const User = require('../model/user')
-const Habit = require('../model/habit')
+const User=require('../model/user')
+const Habit=require('../model/habit')
 const Todo=require('../model/todo')
+const bcrypt=require('bcrypt')
 
+const jwt=require('jsonwebtoken')
+const compare= async function(pwdGiven,pwdStored){
+    return await bcrypt.compare(pwdGiven,pwdStored)
+}
 const {
     GraphQLObjectType,
     GraphQLString,
@@ -15,7 +20,6 @@ const {
     GraphQLBoolean
 }=graphql
 
-
 //TYPES
 const UserType=new GraphQLObjectType({
     name:'User',
@@ -25,9 +29,14 @@ const UserType=new GraphQLObjectType({
         username:{type:GraphQLString},
         email:{type:GraphQLString},
         password:{type:GraphQLString},
+        photo:{type:GraphQLString},
         habits:{
             type:new GraphQLList(HabitType),
             resolve:(parent,args)=>Habit.find({uid:parent.id})
+        },
+        todos:{
+            type:new GraphQLList(TodoType),
+            resolve:(parent,args)=>Todo.find({uid:parent.id})
         }
     })
 })
@@ -58,6 +67,15 @@ const TodoType=new GraphQLObjectType({
             type:UserType,
             resolve:(parent,args)=>User.findById(parent.uid)
         }
+    })
+})
+
+const LoginType=new GraphQLObjectType({
+    name:'Login',
+    fields:()=>({
+        id:{type:GraphQLID},
+        token:{type:GraphQLString},
+        status:{type:GraphQLString}
     })
 })
 
@@ -92,6 +110,23 @@ const RootQuery=new GraphQLObjectType({
         todos:{
             type:new GraphQLList(TodoType),
             resolve:(parent,args)=>Todo.find()
+        },
+        login:{
+            type:LoginType,
+            args:{
+                email:{type:new GraphQLNonNull(GraphQLString)},
+                password:{type:new GraphQLNonNull(GraphQLString)}
+            },
+            resolve:async (parent,args)=>{
+                const user= await User.find({email:args.email}).select('+password')
+                if(!user[0] || !(await compare(args.password,user[0].password))){
+                    return {status:'Not found/Invalid email or password',id:'',token:''}
+                }
+                const token=jwt.sign({id:user[0].id},process.env.JWT_SECRET,{
+                    expiresIn:process.env.JWT_EXP_TIME
+                })
+                return {status:'Found',id:user[0].id,token}
+            }
         }
 
     }
@@ -135,11 +170,8 @@ const updateUser={
         password:{type:GraphQLString}
     },
     resolve(parent,args){
-        return User.findByIdAndUpdate(args.id,{
-            name:args.name?parent.name:args.name,
-            username:args.username?parent.username:args.username,
-            email:args.email?parent.email:args.email,
-            password:args.password?parent.password:args.password,
+        return User.updateOne({id:args.id},{
+            password:args.password
         })
     }
 }
@@ -225,7 +257,7 @@ const Mutation=new GraphQLObjectType({
     fields:{
         addUser,
         delUser,
-        updateUser,
+        // updateUser,
         addHabit,
         delHabit,
         updateHabit,

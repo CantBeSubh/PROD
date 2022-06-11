@@ -1,0 +1,15 @@
+mutation{
+  updateUser(
+    id:"62a444e0a4b9f36e7850ce73"
+		name:"Ishaan"
+    password:"money"
+    email:"ishaan@weeb.com"
+    username:"anonymous_killer"
+  ){
+    name
+    id
+    password
+    username
+    email
+  }
+}

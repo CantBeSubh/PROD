@@ -3,6 +3,8 @@ import Image from 'next/image'
 
 import { useAuthContext } from '../context/auth'
 
+import styles from '../styles/Navbar.module.css'
+
 const Navbar = () => {
 
     const [auth,setAuth]=useAuthContext()
@@ -18,8 +20,8 @@ const Navbar = () => {
             <div className="logo">
                 <Image 
                     src='/favicon.ico'
-                    width={128/2} 
-                    height={128/2}
+                    width={128/4} 
+                    height={128/4}
                     alt='logo'
                 />
             </div>
@@ -27,9 +29,9 @@ const Navbar = () => {
             <Link href='/about'><a>About</a></Link>
             {
                 auth?
-                    <div onClick={logout}>Logout</div>
+                    <div onClick={logout} className={styles.btn}>Logout</div>
                     :
-                    <Link href='/auth'><a><div>Login/Signup</div></a></Link>
+                    <Link href='/auth'><a><div>Account</div></a></Link>
             }
         </nav>
      )

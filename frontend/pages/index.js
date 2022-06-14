@@ -7,7 +7,9 @@ import Login from '../components/LoggedIn'
 
 import {getHabitsQ,getTodosQ} from '../gql/queries'
 
-import { useAuthContext } from '../context/auth';
+import { useAuthContext } from '../context/auth'
+
+import styles from '../styles/Home.module.css'
 
 function App() {
 
@@ -25,14 +27,14 @@ function App() {
   },[getHabits,getTodos])
 
   return (
-    <>
+    <div className={styles.container}>
       <Head>
         <title>PROD</title>
       </Head>
       <div className="App">
         {auth?<Logout habits={habits} todos={todos}/>:<Login/>}
       </div>
-    </>
+    </div>
   )
 }
 

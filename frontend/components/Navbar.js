@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import Image from 'next/image';
+import Image from 'next/image'
 
-import { useAuthContext } from '../context/auth';
+import { useAuthContext } from '../context/auth'
 
-import LoginSignup from './LoginSignup';
+import LoginSignup from './LoginSignup'
 import Logout from './Logout'
 
 const Navbar = () => {
@@ -20,16 +20,16 @@ const Navbar = () => {
         <nav>
             <div className="logo">
                 <Image 
-                src='/favicon.ico' 
-                width={128/2} 
-                height={128/2}
-                alt='logo'
+                    src='/favicon.ico' 
+                    width={128/2} 
+                    height={128/2}
+                    alt='logo'
                 />
             </div>
             <Link href='/'><a>Home</a></Link>
-            <Link href='/'><a>About</a></Link>
+            <Link href='/about'><a>About</a></Link>
             {
-                auth.length>0?
+                auth?
                     <Logout logout={logout}/>
                     :
                     <Link href='/auth'><a><LoginSignup/></a></Link>

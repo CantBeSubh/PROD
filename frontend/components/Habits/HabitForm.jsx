@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { addHabitM, getHabitsQ } from '../../gql/queries'
+import { useAuthContext } from '../../context/auth';
 
-const HabitForm = ({uid}) => {
+const HabitForm = () => {
+  const [auth,setAuth]=useAuthContext()
+
   const [habit,setHabit]=useState({name:'',uid:''})
   const [addHabit,status]=useMutation(addHabitM,{refetchQueries:[
     {query:getHabitsQ},
@@ -13,7 +16,7 @@ const HabitForm = ({uid}) => {
     if (status.loading) return 'Submitting...'
     if (status.error) return `Submission error! ${status.error.message}`
     e.preventDefault()
-    habit.uid=uid
+    habit.uid=auth
     addHabit({variables:habit})
     setHabit({...habit,name:''})
   }

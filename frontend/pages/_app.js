@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import Layout from '../components/Layout'
 import {ApolloClient,InMemoryCache,ApolloProvider} from "@apollo/client"
+import { AuthProvider } from '../context/auth'
 
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
@@ -10,9 +11,11 @@ const client = new ApolloClient({
 function MyApp({ Component, pageProps }) {
   return (  
   <ApolloProvider client={client}>
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <AuthProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+      </AuthProvider>
   </ApolloProvider>
   )
 }

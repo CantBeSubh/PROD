@@ -8,15 +8,17 @@ import TodoList from '../components/Todos/TodoList'
 
 import {getHabitsQ,getTodosQ} from '../gql/queries'
 
+
+import { useAuthContext } from '../context/auth';
+
 function App() {
-  const [uid,setUid]=useState('')
-  useEffect(()=>{
-    setUid(localStorage.getItem('id'))
-  },[])
+
+  const [auth,setAuth]=useAuthContext()
+
   const [habits, setHabits] = useState([])
   const [todos,setTodos]=useState([])
-  const getHabits = useQuery(getHabitsQ,{variables:{uid}})
-  const getTodos = useQuery(getTodosQ,{variables:{uid}})
+  const getHabits = useQuery(getHabitsQ,{variables:{uid:auth}})
+  const getTodos = useQuery(getTodosQ,{variables:{uid:auth}})
 
   useEffect(()=>{
     if(getHabits.data) setHabits(getHabits.data.habits);
@@ -29,8 +31,8 @@ function App() {
         <title>PROD</title>
       </Head>
       <div className="App">
-        Habit: <HabitForm uid={uid}/>
-        Todo: <TodoForm uid={uid}/>
+        Habit: <HabitForm />
+        Todo: <TodoForm />
         <HabitList habits={habits} />
         <TodoList todos={todos}/>
       </div>

@@ -1,6 +1,6 @@
-const Logout = () => {
+const Logout = ({logout}) => {
   return (
-    <div>Logout</div>
+    <div onClick={logout}>Logout</div>
   )
 }
 

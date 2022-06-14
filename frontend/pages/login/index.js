@@ -16,25 +16,28 @@ const index = () => {
         if(status==='Found'){
             localStorage.setItem('id',id)
             localStorage.setItem('jwt',token)
+            setTimeout(()=>router.push('/'),500)
         }
-        setTimeout(()=>router.push('/'),100)
+        else{
+            alert('Invalid email/password!')
+        }
         
     }
     return (
         <form onSubmit={handleSubmit}>
             <input 
-            label='email' 
-            type='email' 
-            placeholder='email'
-            value={state.email}
-            onChange={e=>setState({...state,email:e.target.value})}
+                label='email' 
+                type='email' 
+                placeholder='email'
+                value={state.email}
+                onChange={e=>setState({...state,email:e.target.value})}
             />
             <input 
-            label='password' 
-            type='password' 
-            placeholder='password'
-            value={state.password}
-            onChange={e=>setState({...state,password:e.target.value})}
+                label='password' 
+                type='password' 
+                placeholder='password'
+                value={state.password}
+                onChange={e=>setState({...state,password:e.target.value})}
             />
             <button type='submit'>Login</button>
         </form>

@@ -9,7 +9,9 @@ const Navbar = () => {
     const [auth,setAuth]=useAuthContext()
 
     const logout=()=>{
-        setAuth('')
+        setAuth('');
+        localStorage.setItem('id','')
+        localStorage.setItem('jwt','')
     }
 
 
@@ -25,7 +27,13 @@ const Navbar = () => {
             </div>
             <Link href='/'><a>Home</a></Link>
             <Link href='/'><a>About</a></Link>
-            <Link href='/login'><a>{auth.length>0?<Logout onClick={logout}/>:<LoginSignup/>}</a></Link>
+            {auth.length>0?
+                <Logout logout={logout}/>
+                :
+                <Link href='/login'><a><LoginSignup/></a></Link>
+            }
+
+            
         </nav>
      );
 }

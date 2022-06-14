@@ -8,7 +8,7 @@ const TodoForm = () => {
     const [todo,setTodo]=useState({name:'',uid:''})
 
     const [auth,setAuth]=useAuthContext()
-
+    // console.log(auth)
     const [addTodo,status]=useMutation(addTodoM,{refetchQueries:[
         {query:getTodosQ},
         'GetTodos']})

@@ -5,13 +5,15 @@ import { useAuthContext } from '../context/auth';
 
 import LoginSignup from './LoginSignup';
 import Logout from './Logout'
+
 const Navbar = () => {
+
     const [auth,setAuth]=useAuthContext()
 
     const logout=()=>{
-        setAuth('');
         localStorage.setItem('id','')
         localStorage.setItem('jwt','')
+        setAuth('')
     }
     
     return ( 
@@ -26,12 +28,13 @@ const Navbar = () => {
             </div>
             <Link href='/'><a>Home</a></Link>
             <Link href='/'><a>About</a></Link>
-            {auth.length>0?
-                <Logout logout={logout}/>
-                :
-                <Link href='/auth'><a><LoginSignup/></a></Link>
+            {
+                auth.length>0?
+                    <Logout logout={logout}/>
+                    :
+                    <Link href='/auth'><a><LoginSignup/></a></Link>
             }
         </nav>
-     );
+     )
 }
 export default Navbar;

@@ -2,10 +2,8 @@ import {useState,useEffect} from 'react'
 import {useQuery} from '@apollo/client'
 import Head from 'next/head'
 
-import HabitForm from '../components/Habits/HabitForm.jsx'
-import HabitList from '../components/Habits/HabitList'
-import TodoForm from '../components/Todos/TodoForm'
-import TodoList from '../components/Todos/TodoList'
+import Logout from '../components/LoggedOut'
+import Login from '../components/LoggedIn'
 
 import {getHabitsQ,getTodosQ} from '../gql/queries'
 
@@ -32,14 +30,7 @@ function App() {
         <title>PROD</title>
       </Head>
       <div className="App">
-        {auth && 
-          <>
-            Habit: <HabitForm />
-            Todo: <TodoForm />
-            <HabitList habits={habits} />
-            <TodoList todos={todos}/>
-          </>
-        }
+        {auth?<Logout habits={habits} todos={todos}/>:<Login/>}
       </div>
     </>
   )

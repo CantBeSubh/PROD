@@ -3,9 +3,6 @@ import Image from 'next/image'
 
 import { useAuthContext } from '../context/auth'
 
-import LoginSignup from './LoginSignup'
-import Logout from './Logout'
-
 const Navbar = () => {
 
     const [auth,setAuth]=useAuthContext()
@@ -20,7 +17,7 @@ const Navbar = () => {
         <nav>
             <div className="logo">
                 <Image 
-                    src='/favicon.ico' 
+                    src='/favicon.ico'
                     width={128/2} 
                     height={128/2}
                     alt='logo'
@@ -30,9 +27,9 @@ const Navbar = () => {
             <Link href='/about'><a>About</a></Link>
             {
                 auth?
-                    <Logout logout={logout}/>
+                    <div onClick={logout}>Logout</div>
                     :
-                    <Link href='/auth'><a><LoginSignup/></a></Link>
+                    <Link href='/auth'><a><div>Login/Signup</div></a></Link>
             }
         </nav>
      )

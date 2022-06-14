@@ -1,13 +1,13 @@
 import {useState,useEffect} from 'react'
 import {useQuery} from '@apollo/client'
 import Head from 'next/head'
+
 import HabitForm from '../components/Habits/HabitForm.jsx'
 import HabitList from '../components/Habits/HabitList'
 import TodoForm from '../components/Todos/TodoForm'
 import TodoList from '../components/Todos/TodoList'
 
 import {getHabitsQ,getTodosQ} from '../gql/queries'
-
 
 import { useAuthContext } from '../context/auth';
 
@@ -17,6 +17,7 @@ function App() {
 
   const [habits, setHabits] = useState([])
   const [todos,setTodos]=useState([])
+
   const getHabits = useQuery(getHabitsQ,{variables:{uid:auth}})
   const getTodos = useQuery(getTodosQ,{variables:{uid:auth}})
 

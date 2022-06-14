@@ -3,12 +3,14 @@ import Habit from "./Habit"
 const HabitList = ({habits}) => {
   return (
     <ul>
-      {habits.map(habit=>
-        <Habit
-        key={habit.id}
-        habit={habit}
-        />      
-        )}
+      {
+        habits.map(habit=>
+          <Habit
+            key={habit.id}
+            habit={habit}
+          />      
+        )
+      }
     </ul>
   )
 }

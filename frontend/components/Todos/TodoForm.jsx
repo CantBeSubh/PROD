@@ -1,22 +1,22 @@
 import { useState } from "react"
 import { useMutation } from "@apollo/client"
-import { addTodoM,getTodosQ } from "../../gql/queries"
-import { useAuthContext } from '../../context/auth';
 
-// const uid=localStorage.getItem('id')
+import { addTodoM,getTodosQ } from "../../gql/queries"
+
+import { useAuthContext } from '../../context/auth'
+
 const TodoForm = () => {
-    const [todo,setTodo]=useState({name:'',uid:''})
+
+    const [todo,setTodo]=useState({name:'',uid:auth})
 
     const [auth,setAuth]=useAuthContext()
-    // console.log(auth)
-    const [addTodo,status]=useMutation(addTodoM,{refetchQueries:[
-        {query:getTodosQ},
-        'GetTodos']})
+
+    const [addTodo,status]=useMutation(addTodoM,{refetchQueries:[{query:getTodosQ},'GetTodos']})
 
     const handleSubmit=(e)=>{
+        e.preventDefault()
         if (status.loading) return 'Submitting...'
         if (status.error) return `Submission error! ${status.error.message}`
-        e.preventDefault()
         todo.uid=auth
         addTodo({variables:todo})
         setTodo({...todo,name:''})

@@ -13,8 +13,7 @@ const Navbar = () => {
         localStorage.setItem('id','')
         localStorage.setItem('jwt','')
     }
-
-
+    
     return ( 
         <nav>
             <div className="logo">
@@ -30,12 +29,9 @@ const Navbar = () => {
             {auth.length>0?
                 <Logout logout={logout}/>
                 :
-                <Link href='/login'><a><LoginSignup/></a></Link>
+                <Link href='/auth'><a><LoginSignup/></a></Link>
             }
-
-            
         </nav>
      );
 }
- 
 export default Navbar;

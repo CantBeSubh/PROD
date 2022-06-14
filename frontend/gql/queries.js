@@ -76,6 +76,17 @@ query($email:String!,$password:String!){
   }
 }
 `
+const addUserM=gql`
+mutation($name:String!,$username: String!,$email: String!,$password: String!){
+  addUser(name:$name,username:$username,email:$email,password:$password){
+    login{
+      id
+      status
+      token
+    }
+  }
+}
+`
 
 
 export {
@@ -87,5 +98,6 @@ export {
     addTodoM,
     delTodoM,
     updateTodoM,
-    loginQ
+    loginQ,
+    addUserM
 }

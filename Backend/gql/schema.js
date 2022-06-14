@@ -9,6 +9,8 @@ const jwt=require('jsonwebtoken')
 const compare= async function(pwdGiven,pwdStored){
     return await bcrypt.compare(pwdGiven,pwdStored)
 }
+const tokenGen=id=>jwt.sign({id},process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXP_TIME})
+
 const {
     GraphQLObjectType,
     GraphQLString,
@@ -30,6 +32,16 @@ const UserType=new GraphQLObjectType({
         email:{type:GraphQLString},
         password:{type:GraphQLString},
         photo:{type:GraphQLString},
+        login:{
+            type:LoginType,
+            resolve:(parent,args)=>{
+                return {
+                    status:'Found',
+                    token:tokenGen(parent.id),
+                    id:parent.id
+                }
+            }
+        },
         habits:{
             type:new GraphQLList(HabitType),
             resolve:(parent,args)=>Habit.find({uid:parent.id})
@@ -124,9 +136,7 @@ const RootQuery=new GraphQLObjectType({
                 if(!user[0] || !(await compare(args.password,user[0].password))){
                     return {status:'Not found/Invalid email or password',id:null,token:null}
                 }
-                const token=jwt.sign({id:user[0].id},process.env.JWT_SECRET,{
-                    expiresIn:process.env.JWT_EXP_TIME
-                })
+                const token=tokenGen(user[0].id)
                 return {status:'Found',id:user[0].id,token}
             }
         }

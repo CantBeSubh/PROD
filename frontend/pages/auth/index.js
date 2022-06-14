@@ -24,6 +24,7 @@ const index = () => {
     const [addUser,status]=useMutation(addUserM)
 
     const router = useRouter()
+
     const handleLogin=e=>{
         e.preventDefault()
         if (loading) return <p>LOADING...</p>;
@@ -39,6 +40,7 @@ const index = () => {
             alert('Invalid email/password!')
         }
     }
+    
     const handleSignup=e=>{
         e.preventDefault()
         if (signup.cPassword!==signup.password){
@@ -61,6 +63,7 @@ const index = () => {
         setSignup({name:'',email:'',password:'',username:'',cPassword:''})
         setTimeout(()=>router.push('/'),500)
     }
+
     return (
         <>
             <form onSubmit={handleLogin}>
@@ -81,7 +84,9 @@ const index = () => {
                 />
                 <button type='submit'>Login</button>
             </form>
+
             <br/>
+
             <form onSubmit={handleSignup}>
                 SINGUP
                 <input

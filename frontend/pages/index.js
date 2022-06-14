@@ -31,10 +31,14 @@ function App() {
         <title>PROD</title>
       </Head>
       <div className="App">
-        Habit: <HabitForm />
-        Todo: <TodoForm />
-        <HabitList habits={habits} />
-        <TodoList todos={todos}/>
+        {auth && 
+          <>
+            Habit: <HabitForm />
+            Todo: <TodoForm />
+            <HabitList habits={habits} />
+            <TodoList todos={todos}/>
+          </>
+        }
       </div>
     </>
   )

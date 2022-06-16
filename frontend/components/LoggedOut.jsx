@@ -3,14 +3,20 @@ import HabitList from './Habits/HabitList'
 import TodoForm from './Todos/TodoForm'
 import TodoList from './Todos/TodoList'
 
+import styles from '../styles/Home.module.css'
+
 const Logout = ({habits,todos}) => {
   return (
-    <>
-      Habit: <HabitForm />
-      Todo: <TodoForm />
-      <HabitList habits={habits} />
-      <TodoList todos={todos}/>
-    </>
+    <div className={styles.formContainer}>
+      <div>
+        Habit: <HabitForm />
+        <HabitList habits={habits} />
+      </div>
+      <div>
+        Todo: <TodoForm />
+        <TodoList todos={todos}/>
+      </div>
+    </div>
   )
 }
 

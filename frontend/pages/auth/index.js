@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useRouter } from 'next/router';
 import { loginQ,addUserM } from "../../gql/queries"
 import { useAuthContext } from '../../context/auth'
+import styles from '../../styles/Auth.module.css'
 
 const index = () => {
     const [auth,setAuth]=useAuthContext()
@@ -65,7 +66,7 @@ const index = () => {
     }
 
     return (
-        <>
+        <div className='login'>
             <form onSubmit={handleLogin}>
                 LOGIN
                 <input 
@@ -127,7 +128,7 @@ const index = () => {
                 
                 <button type='submit'>Signup</button>
             </form>
-        </>
+        </div>
   )
 }
 

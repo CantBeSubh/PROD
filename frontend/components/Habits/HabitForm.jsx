@@ -32,7 +32,7 @@ const HabitForm = () => {
         onChange={(e)=>setHabit({...habit,name:e.target.value})}
       />
 
-      <button type='submit'>+</button>
+      <button type='submit' className='btnS'>+</button>
     </form>
   )
 }

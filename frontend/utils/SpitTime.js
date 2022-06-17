@@ -3,6 +3,7 @@ const MS_TO_MIN = 60000;
 const MS_TO_SEC = 1000;
 
 const spitTime = (ms) => {
+  
   let hr = Math.floor(ms / MS_TO_HR);
   hr = hr == 0 ? `` : `${hr}hrs:`;
 

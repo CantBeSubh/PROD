@@ -5,7 +5,6 @@ const {Schema,model}=mongoose
 const {
     emailValidator,
     nameValidator,
-    pwdValidator,
     usernameValidator
 }=require('../utils/validators')
 

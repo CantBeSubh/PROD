@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useMutation,useQuery } from '@apollo/client'
+import {addTimerM, getTimersQ} from '../../gql/queries'
+import { useAuthContext } from '../../context/auth'
+
 
 const MS_TO_HR = 3600000
 const MS_TO_MIN = 60000
@@ -21,7 +25,11 @@ const spitTime = (ms) => {
 }
 
 const index = () => {
+    const [auth,setAuth]=useAuthContext()
     const [entries, setEntries] = useState([])
+    const getTimers = useQuery(getTimersQ,{variables:{uid:auth}})
+
+    const [addTimer,status]=useMutation(addTimerM,{variables:{uid:auth},refetchQueries:[{query:getTimersQ},'GetTimers']})
     const [timer, setTimer] = useState()
     const [entry, setEntry] = useState({
         name: '',
@@ -33,9 +41,19 @@ const index = () => {
     })
     const [id, setId] = useState()
 
+    useEffect(()=>{
+        if(getTimers.data){
+            setEntries(getTimers.data.timers)
+            console.log(getTimers.data.timers)
+        }
+    },[getTimers])
+
     useEffect(() => {
         if (entry.start && entry.end && entry.isPaused) {
-            setEntries([...entries, entry])
+            const l={...entry,uid:auth,start:entry.start.toString(),end:entry.end.toString()}
+            delete l.isPaused
+            console.log(l)
+            addTimer({variables:l})
             setEntry({
                 name: '',
                 genre: '',
@@ -96,12 +114,12 @@ const index = () => {
                 {entries &&
                     entries.map(
                         elm => (
-                            <li>
+                            <li key={elm.id}>
                                 <ul>
                                     <li>{elm.name || 'No Name'} </li>
                                     <li>{elm.genre || 'No genre'} </li>
                                     <li>{elm.category || 'No category'} </li>
-                                    <li>{spitTime(elm.end - elm.start)}</li>
+                                    <li>{spitTime(new Date(elm.end) - new Date(elm.start))}</li>
                                 </ul>
                             </li>
                         )

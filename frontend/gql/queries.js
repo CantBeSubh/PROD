@@ -88,6 +88,25 @@ mutation($name:String!,$username: String!,$email: String!,$password: String!){
 }
 `
 
+const getTimersQ=gql`
+query GetTimers($uid:ID){
+  timers(uid:$uid){
+    id
+    name
+    genre
+    category
+    start
+    end
+  }
+}`
+const addTimerM=gql`
+mutation($uid:ID!,$name:String,$genre:String,$category:String,$start:String,$end:String){
+  addTimer(uid:$uid,name:$name,genre:$genre,category:$category,start:$start,end:$end){
+    name
+  }
+}
+`
+
 
 export {
     getHabitsQ,
@@ -99,5 +118,7 @@ export {
     delTodoM,
     updateTodoM,
     loginQ,
-    addUserM
+    addUserM,
+    getTimersQ,
+    addTimerM
 }

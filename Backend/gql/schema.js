@@ -3,9 +3,11 @@ const graphql=require('graphql')
 const User=require('../model/user')
 const Habit=require('../model/habit')
 const Todo=require('../model/todo')
-const bcrypt=require('bcrypt')
+const Timer=require('../model/timer')
 
+const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
+
 const compare= async function(pwdGiven,pwdStored){
     return await bcrypt.compare(pwdGiven,pwdStored)
 }
@@ -19,7 +21,7 @@ const {
     GraphQLList,
     GraphQLNonNull,
     GraphQLInt,
-    GraphQLBoolean
+    GraphQLBoolean,
 }=graphql
 
 //TYPES
@@ -91,6 +93,22 @@ const LoginType=new GraphQLObjectType({
     })
 })
 
+const TimerType=new GraphQLObjectType({
+    name:'Timer',
+    fields:()=>({
+        id:{type:GraphQLID},
+        uid:{type:GraphQLString},
+        name:{type:GraphQLString},
+        genre:{type:GraphQLString},
+        category:{type:GraphQLString},
+        start:{type:GraphQLString},
+        end:{type:GraphQLString},
+        user:{
+            type:UserType,
+            resolve:(parent,args)=>Timer.findById(parent.uid)
+        }
+    })
+})
 
 //QUERY
 const RootQuery=new GraphQLObjectType({
@@ -139,6 +157,11 @@ const RootQuery=new GraphQLObjectType({
                 const token=tokenGen(user[0].id)
                 return {status:'Found',id:user[0].id,token}
             }
+        },
+        timers:{
+            type:new GraphQLList(TimerType),
+            args:{uid:{type:GraphQLID}},
+            resolve:(parent,args)=>Timer.find({uid:args.uid})
         }
 
     }
@@ -264,6 +287,29 @@ const updateTodo={
     })
 }
 
+const addTimer={
+    type:TimerType,
+    args:{
+        uid:{type:new GraphQLNonNull(GraphQLID)},
+        name:{type:GraphQLString},
+        genre:{type:GraphQLString},
+        category:{type:GraphQLString},
+        start:{type:GraphQLString},
+        end:{type:GraphQLString}
+    },
+    resolve:(parent,args)=>{
+        let timer=new Timer({
+            uid:args.uid,
+            name:args.name,
+            genre:args.genre,
+            category:args.category,
+            start:args.start,
+            end:args.end
+        })
+        return timer.save()
+    }
+}
+
 const Mutation=new GraphQLObjectType({
     name:'Mutation',
     fields:{
@@ -275,7 +321,8 @@ const Mutation=new GraphQLObjectType({
         updateHabit,
         addTodo,
         delTodo,
-        updateTodo
+        updateTodo,
+        addTimer
     }
 })
 

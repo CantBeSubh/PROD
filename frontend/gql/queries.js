@@ -1,4 +1,4 @@
-import {gql} from "@apollo/client";
+import { gql } from "@apollo/client";
 
 //Habit
 const getHabitsQ = gql`
@@ -11,21 +11,21 @@ const getHabitsQ = gql`
       }
   }
 `
-const addHabitM=gql`
+const addHabitM = gql`
 mutation($name:String!,$uid:ID!){
   addHabit(name:$name,uid:$uid){
     name
   }
 }
 `
-const delHabitM=gql`
+const delHabitM = gql`
   mutation($id:ID){
     delHabit(id:$id){
       name
     }
   }
 `
-const updateHabitM=gql`
+const updateHabitM = gql`
 mutation($id:ID!,$name:String,$up:Int,$down:Int){
   updateHabit(id:$id,name:$name,up:$up,down:$down){
     name
@@ -33,7 +33,7 @@ mutation($id:ID!,$name:String,$up:Int,$down:Int){
 }
 `
 //.Todo
-const getTodosQ=gql`
+const getTodosQ = gql`
 query GetTodos($uid:ID){
   todos(uid:$uid){
     name
@@ -42,7 +42,7 @@ query GetTodos($uid:ID){
   }
 }
 `
-const addTodoM=gql`
+const addTodoM = gql`
 mutation($uid:ID!,$name:String!){
   addTodo(name:$name,uid:$uid){
     name
@@ -51,14 +51,14 @@ mutation($uid:ID!,$name:String!){
   }
 }
 `
-const delTodoM=gql`
+const delTodoM = gql`
 mutation($id:ID!){
   delTodo(id:$id){
     name
   }
 }
 `
-const updateTodoM=gql`
+const updateTodoM = gql`
 mutation($id:ID!,$name:String,$check:Boolean){
   updateTodo(id: $id,name: $name,check: $check){
     name
@@ -67,7 +67,7 @@ mutation($id:ID!,$name:String,$check:Boolean){
 `
 
 //User
-const loginQ=gql`
+const loginQ = gql`
 query($email:String!,$password:String!){
   login(email:$email,password:$password){
     status
@@ -76,7 +76,7 @@ query($email:String!,$password:String!){
   }
 }
 `
-const addUserM=gql`
+const addUserM = gql`
 mutation($name:String!,$username: String!,$email: String!,$password: String!){
   addUser(name:$name,username:$username,email:$email,password:$password){
     login{
@@ -88,7 +88,7 @@ mutation($name:String!,$username: String!,$email: String!,$password: String!){
 }
 `
 
-const getTimersQ=gql`
+const getTimersQ = gql`
 query GetTimers($uid:ID){
   timers(uid:$uid){
     id
@@ -99,7 +99,7 @@ query GetTimers($uid:ID){
     end
   }
 }`
-const addTimerM=gql`
+const addTimerM = gql`
 mutation($uid:ID!,$name:String,$genre:String,$category:String,$start:String,$end:String){
   addTimer(uid:$uid,name:$name,genre:$genre,category:$category,start:$start,end:$end){
     name
@@ -107,7 +107,7 @@ mutation($uid:ID!,$name:String,$genre:String,$category:String,$start:String,$end
 }
 `
 
-const delTimerM=gql`
+const delTimerM = gql`
 mutation($id:ID!){
   delTimer(id:$id){
     name
@@ -117,17 +117,17 @@ mutation($id:ID!){
 
 
 export {
-    getHabitsQ,
-    addHabitM,
-    delHabitM,
-    updateHabitM,
-    getTodosQ,
-    addTodoM,
-    delTodoM,
-    updateTodoM,
-    loginQ,
-    addUserM,
-    getTimersQ,
-    addTimerM,
-    delTimerM
+  getHabitsQ,
+  addHabitM,
+  delHabitM,
+  updateHabitM,
+  getTodosQ,
+  addTodoM,
+  delTodoM,
+  updateTodoM,
+  loginQ,
+  addUserM,
+  getTimersQ,
+  addTimerM,
+  delTimerM
 }

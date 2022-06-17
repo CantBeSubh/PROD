@@ -1,48 +1,52 @@
 import { useMutation } from "@apollo/client"
 
-import { 
-  delHabitM, 
+import {
+  delHabitM,
   getHabitsQ,
-  updateHabitM 
+  updateHabitM
 } from "../../gql/queries"
 
-const Habit = ({habit}) => {
+const Habit = ({ habit }) => {
 
-  const [delHabit,status]=useMutation(delHabitM,{refetchQueries:[{query:getHabitsQ},'GetHabits']})
-  
-  const [updateHabit,status2]=useMutation(updateHabitM,{refetchQueries:[{query:getHabitsQ},'GetHabits']})
+  const [delHabit, status] = useMutation(delHabitM, { refetchQueries: [{ query: getHabitsQ }, 'GetHabits'] })
 
-  const handleUp=()=>{
+  const [updateHabit, status2] = useMutation(updateHabitM, { refetchQueries: [{ query: getHabitsQ }, 'GetHabits'] })
+
+  const handleUp = () => {
     if (status2.loading) return 'Submitting...'
     if (status2.error) return `Submission error! ${status.error.message}`
-    updateHabit({variables:{
-      ...habit,
-      up:habit.up+1
-    }})
+    updateHabit({
+      variables: {
+        ...habit,
+        up: habit.up + 1
+      }
+    })
   }
 
-  const handleDown=()=>{
+  const handleDown = () => {
     if (status2.loading) return 'Submitting...'
     if (status2.error) return `Submission error! ${status.error.message}`
-    updateHabit({variables:{
-      ...habit,
-      down:habit.down+1
-    }})
+    updateHabit({
+      variables: {
+        ...habit,
+        down: habit.down + 1
+      }
+    })
   }
 
-  const handleDel=()=>{
+  const handleDel = () => {
     if (status.loading) return 'Submitting...'
     if (status.error) return `Submission error! ${status.error.message}`
-    delHabit({variables:{id:habit.id}})
+    delHabit({ variables: { id: habit.id } })
   }
-  
+
   return (
-      <li>
-        {habit.name} | {habit.up} | -{habit.down} 
-        <button onClick={handleUp}> + </button>
-        <button onClick={handleDown}> - </button>
-        <button onClick={handleDel}> X </button>
-      </li>
+    <li>
+      {habit.name} | {habit.up} | -{habit.down}
+      <button onClick={handleUp}> + </button>
+      <button onClick={handleDown}> - </button>
+      <button onClick={handleDel}> X </button>
+    </li>
   )
 }
 

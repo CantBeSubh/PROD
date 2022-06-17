@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
-import { addTimerM, getTimersQ, delTimerM } from '../../gql/queries'
+import { addTimerM, getTimersQ } from '../../gql/queries'
 import { useAuthContext } from '../../context/auth'
-
+import TimerList from '../../components/Timer/TimerList'
+import { spitTime } from '../../utils/SpitTime'
 
 const MS_TO_HR = 3600000
 const MS_TO_MIN = 60000
@@ -16,7 +17,6 @@ const index = () => {
     const getTimers = useQuery(getTimersQ, { variables: { uid: auth } })
 
     const [addTimer, status] = useMutation(addTimerM, { refetchQueries: [{ query: getTimersQ }, 'GetTimers'] })
-    const [delTimer, status2] = useMutation(delTimerM, { refetchQueries: [{ query: getTimersQ }, 'GetTimers'] })
     const [timer, setTimer] = useState()
     const [entry, setEntry] = useState({
         name: '',
@@ -29,17 +29,13 @@ const index = () => {
     const [id, setId] = useState()
 
     useEffect(() => {
-        if (getTimers.data) {
-            setEntries(getTimers.data.timers)
-            console.log(getTimers.data.timers)
-        }
+        if (getTimers.data) setEntries(getTimers.data.timers);
     }, [getTimers])
 
     useEffect(() => {
         if (entry.start && entry.end && entry.isPaused) {
             const l = { ...entry, uid: auth, start: entry.start.toString(), end: entry.end.toString() }
             delete l.isPaused
-            console.log(l)
             addTimer({ variables: l })
             setEntry({
                 name: '',
@@ -52,28 +48,13 @@ const index = () => {
         }
     }, [entry])
 
-    const spitTime = (ms) => {
-        let hr = Math.floor(ms / MS_TO_HR)
-        hr = hr == 0 ? `` : `${hr}hrs:`
-
-        let min = Math.floor(ms / MS_TO_MIN)
-        min %= 60
-        min = min == 0 ? `` : `${min}mins:`
-
-        let sec = Math.floor(ms / MS_TO_SEC)
-        sec %= 60
-        sec = `${sec}sec`
-
-        const time = `${hr}${min}${sec}`
-        return time
-    }
 
     const handleStart = () => {
         let current = 0
         setEntry({ ...entry, end: null, start: new Date(), isPaused: false })
         setTimer(0)
         setId(setInterval(() => {
-            current += 1 * MS_TO_SEC
+            current += 1000
             setTimer(current)
         }, 1000))
     }
@@ -114,23 +95,7 @@ const index = () => {
 
             {!entry.isPaused && `Start timer = ${spitTime(timer)}`}
 
-            <ol>
-                {entries &&
-                    entries.map(
-                        elm => (
-                            <li key={elm.id}>
-                                <ul>
-                                    <li>{elm.name || 'No Name'} </li>
-                                    <li>{elm.genre || 'No genre'} </li>
-                                    <li>{elm.category || 'No category'} </li>
-                                    <li>{spitTime(new Date(elm.end) - new Date(elm.start))}</li>
-                                    <button onClick={() => delTimer({ variables: { id: elm.id } })}>-</button>
-                                </ul>
-                            </li>
-                        )
-                    )
-                }
-            </ol>
+            {entries && <TimerList entries={entries} />}
         </div>
     )
 }

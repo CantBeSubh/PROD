@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client"
 import { useState } from "react"
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 import { loginQ,addUserM } from "../../gql/queries"
 import { useAuthContext } from '../../context/auth'
 import styles from '../../styles/Auth.module.css'

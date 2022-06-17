@@ -4,15 +4,18 @@ import { addTimerM, getTimersQ } from '../../gql/queries'
 import { useAuthContext } from '../../context/auth'
 import TimerList from '../../components/Timer/TimerList'
 import { spitTime } from '../../utils/SpitTime'
-
-const MS_TO_HR = 3600000
-const MS_TO_MIN = 60000
-const MS_TO_SEC = 1000
-
+import { useRouter } from 'next/router'
 
 
 const index = () => {
+    const router=useRouter()
     const [auth, setAuth] = useAuthContext()
+    useEffect(()=>{
+        if(!auth){
+            setTimeout(()=>router.push('/auth'),500)
+        }
+    },[])
+        
     const [entries, setEntries] = useState([])
     const getTimers = useQuery(getTimersQ, { variables: { uid: auth } })
 

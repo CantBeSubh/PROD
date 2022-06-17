@@ -310,6 +310,16 @@ const addTimer={
     }
 }
 
+const delTimer={
+    type:TimerType,
+    args:{
+        id:{type:new GraphQLNonNull(GraphQLID)}
+    },
+    resolve:(parent,args)=>{
+        return Timer.findByIdAndDelete(args.id)
+    }
+}
+
 const Mutation=new GraphQLObjectType({
     name:'Mutation',
     fields:{
@@ -322,7 +332,8 @@ const Mutation=new GraphQLObjectType({
         addTodo,
         delTodo,
         updateTodo,
-        addTimer
+        addTimer,
+        delTimer
     }
 })
 

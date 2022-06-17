@@ -107,6 +107,14 @@ mutation($uid:ID!,$name:String,$genre:String,$category:String,$start:String,$end
 }
 `
 
+const delTimerM=gql`
+mutation($id:ID!){
+  delTimer(id:$id){
+    name
+  }
+}
+`
+
 
 export {
     getHabitsQ,
@@ -120,5 +128,6 @@ export {
     loginQ,
     addUserM,
     getTimersQ,
-    addTimerM
+    addTimerM,
+    delTimerM
 }

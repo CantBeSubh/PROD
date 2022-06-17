@@ -4,18 +4,24 @@ const MS_TO_HR= 3600000
 const MS_TO_MIN=60000
 const MS_TO_SEC=1000
 
-const spitTime=ms=>{
+const spitTime = (ms) => {
     let hr=Math.floor(ms/MS_TO_HR)
+    hr = hr==0?``:`${hr}hrs:`
+
     let min=Math.floor(ms/MS_TO_MIN)
-    let sec=Math.floor(ms/MS_TO_SEC)
-    ms=Math.floor(((ms/1000)%1)*1000)
-    sec%=60
     min%=60
-    const time=`${hr}hours:${min}min:${sec}seconds`
+    min = min==0?``:`${min}mins:`
+
+    let sec=Math.floor(ms/MS_TO_SEC)
+    sec%=60
+    sec =`${sec}sec`
+    
+    const time=`${hr}${min}${sec}`
     return time
 }
 
 const index = () => {
+    const [entries,setEntries]=useState([])
     const [timer,setTimer]=useState()
     const [entry,setEntry]=useState({
         name:'',
@@ -27,7 +33,19 @@ const index = () => {
     })
     const [id,setId]=useState()
 
-    useEffect(()=>console.table(entry),[entry])
+    useEffect(()=>{
+        if(entry.start && entry.end && entry.isPaused){
+                setEntries([...entries,entry])
+                setEntry({        
+                name:'',
+                genre:'',
+                category:'',
+                start:null,
+                end:null,
+                isPaused:true
+            })
+            }
+    },[entry])
 
     const handleStart=()=>{
         let current=0
@@ -42,7 +60,7 @@ const index = () => {
 
     const handleStop=()=>{
         clearInterval(id)
-        setEntry({name:'',genre:'',category:'',end:new Date(),isPaused:true})
+        setEntry({...entry,end:new Date(),isPaused:true})
         setTimer(0)
         setId('')
     }
@@ -55,6 +73,7 @@ const index = () => {
                     type='text' 
                     value={entry.name}
                     onChange={e=>setEntry({...entry,name:e.target.value})}
+                    autoComplete='off'
                 />
                 <input 
                     placeholder='genre' 
@@ -68,13 +87,29 @@ const index = () => {
                     value={entry.category}
                     onChange={e=>setEntry({...entry,category:e.target.value})}
                 />
+                {entry.isPaused && <button onClick={handleStart}>+</button>}
+                {!entry.isPaused && <button onClick={handleStop}>X</button>}
             </form>
 
             {!entry.isPaused && `Start timer = ${spitTime(timer)}`}
-            {entry.isPaused && <button onClick={handleStart}>+</button>}
-            {!entry.isPaused && <button onClick={handleStop}>X</button>}
-            {entry.isPaused && entry.end && 
-            `timeSpent:${spitTime(entry.end-entry.start)}`}
+
+            <ol>
+            {entries&&
+            entries.map(
+                elm=>(
+                    <li>
+                        <ul>
+                            <li>{elm.name || 'No Name'} </li>
+                            <li>{elm.genre || 'No genre'} </li>
+                            <li>{elm.category || 'No category'} </li> 
+                            <li>{spitTime(elm.end-elm.start)}</li>
+                        </ul>
+                    </li>
+                    )
+                )
+            }
+
+            </ol>
         </div>
     )
 }

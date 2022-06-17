@@ -27,6 +27,7 @@ const Navbar = () => {
             </div>
             <Link href='/'><a>Home</a></Link>
             <Link href='/about'><a>About</a></Link>
+            <Link href='/timer'><a>Timer</a></Link>
             {
                 auth?
                     <div onClick={logout} className={styles.btn}>Logout</div>

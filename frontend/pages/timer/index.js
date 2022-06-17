@@ -17,18 +17,22 @@ const spitTime=ms=>{
 
 const index = () => {
     const [timer,setTimer]=useState()
-    const [start,setStart]=useState()
-    const [end,setEnd]=useState()
-    const [isPaused,setIsPaused]=useState(true)
+    const [entry,setEntry]=useState({
+        name:'',
+        genre:'',
+        category:'',
+        start:null,
+        end:null,
+        isPaused:true
+    })
     const [id,setId]=useState()
+
+    useEffect(()=>console.table(entry),[entry])
 
     const handleStart=()=>{
         let current=0
-        setEnd()
-        setStart(new Date())
+        setEntry({...entry,end:null,start:new Date(),isPaused:false})
         setTimer(0)
-        setIsPaused(false)
-
         setId(setInterval(()=>{
             current+=1*MS_TO_SEC
             setTimer(current)
@@ -38,18 +42,39 @@ const index = () => {
 
     const handleStop=()=>{
         clearInterval(id)
-        setIsPaused(true)
+        setEntry({name:'',genre:'',category:'',end:new Date(),isPaused:true})
         setTimer(0)
         setId('')
-        setEnd(new Date())
     }
 
     return (
         <div>
-            {!isPaused && `Start timer = ${spitTime(timer)}`}
-            {isPaused && <button onClick={handleStart}>+</button>}
-            {!isPaused && <button onClick={handleStop}>X</button>}
-            {isPaused && end && `timeSpent:${spitTime(end-start)}`}
+            <form>
+                <input 
+                    placeholder='name' 
+                    type='text' 
+                    value={entry.name}
+                    onChange={e=>setEntry({...entry,name:e.target.value})}
+                />
+                <input 
+                    placeholder='genre' 
+                    type='text' 
+                    value={entry.genre}
+                    onChange={e=>setEntry({...entry,genre:e.target.value})}
+                />
+                <input 
+                    placeholder='category' 
+                    type='text' 
+                    value={entry.category}
+                    onChange={e=>setEntry({...entry,category:e.target.value})}
+                />
+            </form>
+
+            {!entry.isPaused && `Start timer = ${spitTime(timer)}`}
+            {entry.isPaused && <button onClick={handleStart}>+</button>}
+            {!entry.isPaused && <button onClick={handleStop}>X</button>}
+            {entry.isPaused && entry.end && 
+            `timeSpent:${spitTime(entry.end-entry.start)}`}
         </div>
     )
 }

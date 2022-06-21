@@ -18,21 +18,25 @@ const Navbar = () => {
     return (
         <nav>
             <div className="logoNav">
-                <Image
-                    src='/favicon.ico'
-                    width={50}
-                    height={50}
-                    alt='logo'
-                />
+                <Link href='https://github.com/h0lycow/PROD'>
+                    <a>
+                        <Image
+                            src='/favicon.ico'
+                            width={32}
+                            height={32}
+                            alt='logo'
+                        />
+                    </a>
+                </Link>
             </div>
-            <Link href='/' ><a className={styles.btn}>Home</a></Link>
-            <Link href='/about' ><a className={styles.btn}>About</a></Link>
-            <Link href='/timer' ><a className={styles.btn}>Timer</a></Link>
+            <Link href='/' ><div className={styles.btn}>Home</div></Link>
+            <Link href='/about' ><div className={styles.btn}>About</div></Link>
+            <Link href='/timer' ><div className={styles.btn}>Timer</div></Link>
             {
                 auth ?
                     <div onClick={logout} className={styles.btn}>Logout</div>
                     :
-                    <Link href='/auth'><a><div>Account</div></a></Link>
+                    <Link href='/auth'><a className={styles.btn}><div>Account</div></a></Link>
             }
         </nav>
     )

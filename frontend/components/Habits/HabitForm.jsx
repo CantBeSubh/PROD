@@ -1,25 +1,28 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 
+import Button from '../Button1'
 import { addHabitM, getHabitsQ } from '../../gql/queries'
 
-import { useAuthContext } from '../../context/auth';
+import { useAuthContext } from '../../context/auth'
 
 const HabitForm = () => {
 
-  const [auth,setAuth]=useAuthContext()
+  const [auth] = useAuthContext()
 
-  const [habit,setHabit]=useState({name:'',uid:auth})
+  const [habit, setHabit] = useState({ name: '', uid: auth })
 
-  const [addHabit,status]=useMutation(addHabitM,{refetchQueries:[{query:getHabitsQ},'GetHabits']})
+  const [addHabit, status] = useMutation(addHabitM, {
+    refetchQueries: [{ query: getHabitsQ }, 'GetHabits']
+  })
 
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault()
     if (status.loading) return 'Submitting...'
     if (status.error) return `Submission error! ${status.error.message}`
-    habit.uid=auth
-    addHabit({variables:habit})
-    setHabit({...habit,name:''})
+    habit.uid = auth
+    addHabit({ variables: habit })
+    setHabit({ ...habit, name: '' })
   }
 
   return (
@@ -29,10 +32,10 @@ const HabitForm = () => {
         type="text"
         name="habit"
         value={habit.name}
-        onChange={(e)=>setHabit({...habit,name:e.target.value})}
+        onChange={(e) => setHabit({ ...habit, name: e.target.value })}
       />
 
-      <button type='submit' className='btnS'>+</button>
+      <Button type='submit'>+</Button>
     </form>
   )
 }

@@ -5,7 +5,7 @@ import TodoList from '../Todos/TodoList'
 
 import styles from '../../styles/Home.module.css'
 
-const Logout = ({habits,todos}) => {
+const Logout = ({ habits, todos }) => {
   return (
     <div className={styles.formContainer}>
       <div>
@@ -14,7 +14,7 @@ const Logout = ({habits,todos}) => {
       </div>
       <div>
         Todo: <TodoForm />
-        <TodoList todos={todos}/>
+        <TodoList todos={todos} />
       </div>
     </div>
   )

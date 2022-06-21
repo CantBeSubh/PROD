@@ -1,25 +1,26 @@
 import { useState } from "react"
 import { useMutation } from "@apollo/client"
 
-import { addTodoM,getTodosQ } from "../../gql/queries"
+import Button from "../Button1"
+import { addTodoM, getTodosQ } from "../../gql/queries"
 
 import { useAuthContext } from '../../context/auth'
 
 const TodoForm = () => {
 
-    const [todo,setTodo]=useState({name:'',uid:auth})
+    const [todo, setTodo] = useState({ name: '', uid: auth })
 
-    const [auth,setAuth]=useAuthContext()
+    const [auth, setAuth] = useAuthContext()
 
-    const [addTodo,status]=useMutation(addTodoM,{refetchQueries:[{query:getTodosQ},'GetTodos']})
+    const [addTodo, status] = useMutation(addTodoM, { refetchQueries: [{ query: getTodosQ }, 'GetTodos'] })
 
-    const handleSubmit=(e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault()
         if (status.loading) return 'Submitting...'
         if (status.error) return `Submission error! ${status.error.message}`
-        todo.uid=auth
-        addTodo({variables:todo})
-        setTodo({...todo,name:''})
+        todo.uid = auth
+        addTodo({ variables: todo })
+        setTodo({ ...todo, name: '' })
     }
 
     return (
@@ -29,10 +30,10 @@ const TodoForm = () => {
                 type="text"
                 name="todo"
                 value={todo.name}
-                onChange={e=>setTodo({...todo,name:e.target.value})}
+                onChange={e => setTodo({ ...todo, name: e.target.value })}
             />
 
-            <button type="submit">+</button>
+            <Button type="submit">+</Button>
         </form>
     )
 }

@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client"
 
+import Button from "../Button2"
 import {
   delHabitM,
   getHabitsQ,
@@ -45,7 +46,7 @@ const Habit = ({ habit }) => {
       {habit.name} | {habit.up} | -{habit.down}
       <button onClick={handleUp}> + </button>
       <button onClick={handleDown}> - </button>
-      <button onClick={handleDel}> X </button>
+      <Button onClick={handleDel}> X </Button>
     </li>
   )
 }

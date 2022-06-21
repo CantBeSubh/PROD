@@ -1,0 +1,19 @@
+.cntr {
+  font-size: 1.5rem;
+  position: relative;
+  left: 50vw;
+  transform: translateX(-50%);
+  display: flex;
+  width: 70%;
+  justify-content: space-around;
+}
+
+/* .form {
+  border: 1px solid black;
+  padding: 2%;
+}
+
+.form_singup {
+  border: 1px solid black;
+  padding: 6%;
+} */

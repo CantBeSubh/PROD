@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
 
 html,
 body {
@@ -18,7 +18,7 @@ a {
   box-sizing: border-box;
 }
 
-nav{
+nav {
   margin: 10px auto 80px;
   padding: 10px 0;
   display: flex;
@@ -43,16 +43,4 @@ footer {
   margin-top: 60px;
   color: #333;
   border-top: 1px solid #777;
-}
-
-.btnS{
-  margin: 10px;
-  border-radius: 4px;
-  background-color: white;
-  border: 1px solid black;
-  transition: all .2s;
-}
-
-.btnS:hover{
-  background-color: lightgreen;
 }

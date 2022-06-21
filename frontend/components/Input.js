@@ -1,4 +1,4 @@
-import styles from '../styles/Comps.module.css'
+import { useEffect, useState } from 'react'
 import { v4 } from 'uuid'
 const Input = ({
     type,
@@ -6,7 +6,11 @@ const Input = ({
     value,
     onChange
 }) => {
-    const id = v4()
+    const [id, setId] = useState()
+
+    useEffect(() => {
+        setId(v4())
+    }, [])
     return (
         <input
             spellCheck='off'

@@ -4,10 +4,12 @@ import { useRouter } from 'next/router'
 import { loginQ, addUserM } from "../../gql/queries"
 import { useAuthContext } from '../../context/auth'
 import Input from "../../components/Input"
+import Button from "../../components/Button3"
 import styles from '../../styles/Auth.module.css'
 
 const index = () => {
     const [auth, setAuth] = useAuthContext()
+    const [type, setType] = useState('password')
 
     const [login, setLogin] = useState({
         email: '',
@@ -71,55 +73,70 @@ const index = () => {
     return (
         <div className={styles.cntr}>
             <form className={styles.form} onSubmit={handleLogin}>
-                LOGIN
-                <Input
-                    label='E-Mail'
-                    type='email'
-                    value={login.email}
-                    onChange={e => setLogin({ ...login, email: e.target.value })}
-                />
-                <Input
-                    label='Password'
-                    type='password'
-                    value={login.password}
-                    onChange={e => setLogin({ ...login, password: e.target.value })}
-                />
-                <button type='submit'>Login</button>
+                <div>
+                    LOGIN
+                    <Input
+                        label='E-Mail'
+                        type='email'
+                        value={login.email}
+                        onChange={e => setLogin({ ...login, email: e.target.value })}
+                    />
+                    <Input
+                        label='Password'
+                        type={type}
+                        value={login.password}
+                        onChange={e => setLogin({ ...login, password: e.target.value })}
+                    />
+                    <input
+                        type='checkbox'
+                        onClick={() => setType(old => old == 'text' ? 'password' : 'text')}
+                    />
+                </div>
+                <div>
+                    <Button type='submit'>Login</Button>
+                </div>
             </form>
-            <form className={styles.form_singup} onSubmit={handleSignup}>
-                SINGUP
-                <Input
-                    label='Name'
-                    type='text'
-                    value={signup.name}
-                    onChange={e => setSignup({ ...signup, name: e.target.value })}
-                />
-                <Input
-                    label='E-Mail'
-                    type='email'
-                    value={signup.email}
-                    onChange={e => setSignup({ ...signup, email: e.target.value })}
-                />
-                <Input
-                    label='Username'
-                    type='text'
-                    value={signup.username}
-                    onChange={e => setSignup({ ...signup, username: e.target.value })}
-                />
-                <Input
-                    label='Password'
-                    type='password'
-                    value={signup.password}
-                    onChange={e => setSignup({ ...signup, password: e.target.value })}
-                />
-                <Input
-                    label='Confirm Password'
-                    type='password'
-                    value={signup.cPassword}
-                    onChange={e => setSignup({ ...signup, cPassword: e.target.value })}
-                />
-
-                <button type='submit'>Signup</button>
+            <form className={styles.form} onSubmit={handleSignup}>
+                <div>
+                    SINGUP
+                    <Input
+                        label='Name'
+                        type='text'
+                        value={signup.name}
+                        onChange={e => setSignup({ ...signup, name: e.target.value })}
+                    />
+                    <Input
+                        label='E-Mail'
+                        type='email'
+                        value={signup.email}
+                        onChange={e => setSignup({ ...signup, email: e.target.value })}
+                    />
+                    <Input
+                        label='Username'
+                        type='text'
+                        value={signup.username}
+                        onChange={e => setSignup({ ...signup, username: e.target.value })}
+                    />
+                    <Input
+                        label='Password'
+                        type={type}
+                        value={signup.password}
+                        onChange={e => setSignup({ ...signup, password: e.target.value })}
+                    />
+                    <Input
+                        label='Confirm Password'
+                        type={type}
+                        value={signup.cPassword}
+                        onChange={e => setSignup({ ...signup, cPassword: e.target.value })}
+                    />
+                    <input
+                        type='checkbox'
+                        onClick={() => setType(old => old == 'text' ? 'password' : 'text')}
+                    />
+                </div>
+                <div>
+                    <Button type='submit'>Signup</Button>
+                </div>
             </form>
         </div>
     )

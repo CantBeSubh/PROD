@@ -9,7 +9,6 @@ html,
 body {
   margin: 20px;
   background-color: #f2f2f2;
-  color: black;
   font-family: "Nunito";
   line-height: 1.7;
   color: #c4c3ca;
@@ -40,7 +39,7 @@ nav {
 }
 
 nav a {
-  margin-left: 12px;
+  margin-left: 32px;
 }
 
 nav .logoNav {

@@ -2,8 +2,8 @@ import {useState,useEffect} from 'react'
 import {useQuery} from '@apollo/client'
 import Head from 'next/head'
 
-import Logout from '../components/LoggedOut'
-import Login from '../components/LoggedIn'
+import Logout from '../components/Home/LoggedOut'
+import Login from '../components/Home/LoggedIn'
 
 import {getHabitsQ,getTodosQ} from '../gql/queries'
 
@@ -13,7 +13,7 @@ import styles from '../styles/Home.module.css'
 
 function App() {
 
-  const [auth,setAuth]=useAuthContext()
+  const [auth]=useAuthContext()
 
   const [habits, setHabits] = useState([])
   const [todos,setTodos]=useState([])

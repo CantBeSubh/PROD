@@ -1,9 +1,9 @@
-import HabitForm from './Habits/HabitForm.jsx'
-import HabitList from './Habits/HabitList'
-import TodoForm from './Todos/TodoForm'
-import TodoList from './Todos/TodoList'
+import HabitForm from '../Habits/HabitForm.jsx'
+import HabitList from '../Habits/HabitList'
+import TodoForm from '../Todos/TodoForm'
+import TodoList from '../Todos/TodoList'
 
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 
 const Logout = ({habits,todos}) => {
   return (

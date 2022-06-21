@@ -7,21 +7,21 @@ import styles from '../styles/Navbar.module.css'
 
 const Navbar = () => {
 
-    const [auth,setAuth]=useAuthContext()
+    const [auth, setAuth] = useAuthContext()
 
-    const logout=()=>{
-        localStorage.setItem('id','')
-        localStorage.setItem('jwt','')
+    const logout = () => {
+        localStorage.setItem('id', '')
+        localStorage.setItem('jwt', '')
         setAuth('')
     }
-    
-    return ( 
+
+    return (
         <nav>
-            <div className="logo">
-                <Image 
+            <div className="logoNav">
+                <Image
                     src='/favicon.ico'
-                    width={128/4} 
-                    height={128/4}
+                    width={128 / 4}
+                    height={128 / 4}
                     alt='logo'
                 />
             </div>
@@ -29,12 +29,12 @@ const Navbar = () => {
             <Link href='/about'><a>About</a></Link>
             <Link href='/timer'><a>Timer</a></Link>
             {
-                auth?
+                auth ?
                     <div onClick={logout} className={styles.btn}>Logout</div>
                     :
                     <Link href='/auth'><a><div>Account</div></a></Link>
             }
         </nav>
-     )
+    )
 }
 export default Navbar;

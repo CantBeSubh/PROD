@@ -28,7 +28,7 @@ const HabitForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='form-group'>
+    <form onSubmit={handleSubmit} className='form-group '>
       <Input
         label="Habit"
         type="text"

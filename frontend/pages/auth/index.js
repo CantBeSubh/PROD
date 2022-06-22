@@ -10,11 +10,11 @@ import Button from "../../components/Button3"
 const index = () => {
     const router = useRouter()
     const [auth, setAuth] = useAuthContext()
-    // useEffect(() => {
-    //     if (auth) {
-    //         setTimeout(() => router.push('/'), 500)
-    //     }
-    // }, [auth])
+    useEffect(() => {
+        if (auth) {
+            setTimeout(() => router.push('/'), 500)
+        }
+    }, [auth])
     const [type, setType] = useState('password')
 
     const [login, setLogin] = useState({

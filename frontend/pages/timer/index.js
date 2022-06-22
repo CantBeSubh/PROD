@@ -71,7 +71,7 @@ const index = () => {
 
 
     return (
-        <div>
+        <div className='p-5'>
             <form>
                 <input
                     placeholder='name'

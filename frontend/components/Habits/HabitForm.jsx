@@ -6,6 +6,8 @@ import { addHabitM, getHabitsQ } from '../../gql/queries'
 
 import { useAuthContext } from '../../context/auth'
 
+import Input from '../Input'
+
 const HabitForm = () => {
 
   const [auth] = useAuthContext()
@@ -26,16 +28,17 @@ const HabitForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} >
-      <input
+    <form onSubmit={handleSubmit} className='form-group'>
+      <Input
         label="Habit"
         type="text"
-        name="habit"
         value={habit.name}
         onChange={(e) => setHabit({ ...habit, name: e.target.value })}
       />
 
-      <Button type='submit'>+</Button>
+      <i className="input-icon uil uil-plus"></i>
+
+      {/* <Button type='submit'>+</Button> */}
     </form>
   )
 }

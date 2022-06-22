@@ -8,14 +8,14 @@ import { useRouter } from 'next/router'
 
 
 const index = () => {
-    const router=useRouter()
+    const router = useRouter()
     const [auth, setAuth] = useAuthContext()
-    useEffect(()=>{
-        if(!auth){
-            setTimeout(()=>router.push('/auth'),500)
+    useEffect(() => {
+        if (!auth) {
+            setTimeout(() => router.push('/auth'), 500)
         }
-    },[])
-        
+    }, [auth])
+
     const [entries, setEntries] = useState([])
     const getTimers = useQuery(getTimersQ, { variables: { uid: auth } })
 

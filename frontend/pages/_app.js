@@ -3,7 +3,6 @@ import '../styles/Auth.css'
 import Layout from '../components/Layout'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 import { AuthProvider } from '../context/auth'
-import Head from 'next/head'
 
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',

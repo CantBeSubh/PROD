@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client"
 import Head from 'next/head'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
 import { loginQ, addUserM } from "../../gql/queries"
 import { useAuthContext } from '../../context/auth'
@@ -8,7 +8,13 @@ import Input from "../../components/Input"
 import Button from "../../components/Button3"
 
 const index = () => {
+    const router = useRouter()
     const [auth, setAuth] = useAuthContext()
+    useEffect(() => {
+        if (auth) {
+            setTimeout(() => router.push('/'), 500)
+        }
+    }, [auth])
     const [type, setType] = useState('password')
 
     const [login, setLogin] = useState({
@@ -27,7 +33,6 @@ const index = () => {
     const { loading, error, data } = useQuery(loginQ, { variables: login })
     const [addUser, status] = useMutation(addUserM)
 
-    const router = useRouter()
 
     const handleLogin = e => {
         e.preventDefault()
@@ -93,7 +98,7 @@ const index = () => {
                                     <div className="card-3d-wrapper">
                                         <div className="card-front">
                                             <div className="center-wrap">
-                                                <div className="section text-center">
+                                                <form className="section text-center">
                                                     <h4 className="mb-4 pb-3">Log In</h4>
 
                                                     <div className="form-group">
@@ -124,13 +129,13 @@ const index = () => {
                                                             Forgot your password?
                                                         </a>
                                                     </p>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                         <div className="card-back">
                                             <div className="center-wrap">
-                                                <div className="section text-center">
-                                                    <h4 className="mb-4 pb-3">Sign Up</h4>
+                                                <form className="section text-center">
+                                                    <h4 className="mb-2 pb-3">Sign Up</h4>
 
                                                     <div className="form-group">
                                                         <Input
@@ -183,7 +188,7 @@ const index = () => {
                                                     </div>
 
                                                     <Button onClick={handleSignup}>submit</Button>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

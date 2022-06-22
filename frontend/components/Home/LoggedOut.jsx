@@ -2,15 +2,21 @@ import HabitForm from '../Habits/HabitForm.jsx'
 import HabitList from '../Habits/HabitList'
 import TodoForm from '../Todos/TodoForm'
 import TodoList from '../Todos/TodoList'
+import DailyForm from '../Daily/DailyForm'
+import DailyList from '../Daily/DailyList'
 
 import styles from '../../styles/Home.module.css'
 
-const Logout = ({ habits, todos }) => {
+const Logout = ({ habits, todos, dailies }) => {
   return (
     <div className={styles.formContainer}>
       <div>
         Habit: <HabitForm />
         <HabitList habits={habits} />
+      </div>
+      <div>
+        Daily : <DailyForm />
+        <DailyList dailies={dailies} />
       </div>
       <div>
         Todo: <TodoForm />

@@ -65,6 +65,31 @@ mutation($id:ID!,$name:String,$check:Boolean){
   }
 }
 `
+//Daily
+const getDailyQ = gql`
+query GetDailies($uid:ID){
+  dailies(uid:$uid){
+    id
+    name
+    iat
+  }
+}
+`
+const addDailyM = gql`
+mutation($name:String!,$uid:ID!){
+  addDaily(name:$name,uid:$uid){
+    id
+  }
+}
+`
+
+const delDailyM = gql`
+mutation($id:ID!){
+  delDaily(id:$id){
+    id
+  }
+}
+`
 
 //User
 const loginQ = gql`
@@ -88,6 +113,7 @@ mutation($name:String!,$username: String!,$email: String!,$password: String!){
 }
 `
 
+//Timer
 const getTimersQ = gql`
 query GetTimers($uid:ID){
   timers(uid:$uid){
@@ -129,5 +155,8 @@ export {
   addUserM,
   getTimersQ,
   addTimerM,
-  delTimerM
+  delTimerM,
+  getDailyQ,
+  addDailyM,
+  delDailyM
 }

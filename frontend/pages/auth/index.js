@@ -10,11 +10,13 @@ import Button from "../../components/Button3"
 const index = () => {
     const router = useRouter()
     const [auth, setAuth] = useAuthContext()
+
     useEffect(() => {
         if (auth) {
             setTimeout(() => router.push('/'), 500)
         }
     }, [auth])
+
     const [type, setType] = useState('password')
 
     const [login, setLogin] = useState({
@@ -36,30 +38,36 @@ const index = () => {
 
     const handleLogin = e => {
         e.preventDefault()
+
         if (loading) return <p>LOADING...</p>;
         if (error) return <p>ERROR</p>;
+
         const { id, token, status } = data.login
+
         if (status === 'Found') {
             localStorage.setItem('id', id)
             localStorage.setItem('jwt', token)
             setAuth(id)
             setTimeout(() => router.push('/'), 500)
-        }
-        else {
+        } else {
             alert('Invalid email/password!')
         }
     }
 
     const handleSignup = e => {
         e.preventDefault()
+
         if (signup.cPassword !== signup.password) {
             alert("Confirm password doesn't match")
             return
         }
+
         if (status.loading) return <p>LOADING...</p>;
         if (status.error) return <p>ERROR</p>;
+
         const newUser = signup
         delete newUser.cPassword
+
         addUser({
             variables: newUser, onCompleted: (data) => {
                 const { id, token, status } = data.addUser.login
@@ -71,6 +79,7 @@ const index = () => {
                 }
             }
         })
+
         setSignup({ name: '', email: '', password: '', username: '', cPassword: '' })
         setTimeout(() => router.push('/'), 500)
     }
@@ -82,6 +91,7 @@ const index = () => {
                     <title>Auth</title>
                 </Head>
             </div>
+
             <div className="section">
                 <div className="container">
                     <div className="row full-height justify-content-center">
@@ -132,9 +142,11 @@ const index = () => {
                                                 </form>
                                             </div>
                                         </div>
+
                                         <div className="card-back">
                                             <div className="center-wrap">
                                                 <form className="section text-center">
+
                                                     <h4 className="mb-2 pb-3">Sign Up</h4>
 
                                                     <div className="form-group">

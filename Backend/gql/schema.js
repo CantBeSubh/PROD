@@ -312,10 +312,13 @@ const addDaily = {
         name: { type: new GraphQLNonNull(GraphQLString) },
     },
     resolve: (parent, args) => {
+        const date = new Date()
+        date.setHours(24, 0, 0, 0)
+        date.setDate(date.getDate() - 1)
         let daily = new Daily({
             uid: args.uid,
             name: args.name,
-            iat: new Date().toString()
+            iat: date.toString()
         })
         return daily.save()
     }
@@ -325,7 +328,41 @@ const delDaily = {
     args: {
         id: { type: new GraphQLNonNull(GraphQLID) }
     },
-    resolve: (parents, args) => Daily.findByIdAndDelete(args.id)
+    resolve: (parent, args) => Daily.findByIdAndDelete(args.id)
+}
+
+const checkDaily = {
+    type: DailyType,
+    args: {
+        id: { type: new GraphQLNonNull(GraphQLID) }
+    },
+    resolve: async (parent, args) => {
+        let daily = await Daily.findById(args.id)
+        let a = new Date()
+        a.setHours(24, 0, 0, 0)
+        return Daily.findByIdAndUpdate(args.id, {
+            iat: a.toString()
+        })
+    }
+
+}
+
+const uncheckDaily = {
+    type: DailyType,
+    args: {
+        id: { type: new GraphQLNonNull(GraphQLID) }
+    },
+    resolve: async (parent, args) => {
+        let daily = await Daily.findById(args.id)
+        let a = new Date()
+        a.setHours(24, 0, 0, 0)
+        a.setDate(a.getDate() - 1)
+        console.log(a.toString())
+        return Daily.findByIdAndUpdate(args.id, {
+            iat: a.toString()
+        })
+    }
+
 }
 const addTimer = {
     type: TimerType,
@@ -375,7 +412,9 @@ const Mutation = new GraphQLObjectType({
         addDaily,
         delDaily,
         addTimer,
-        delTimer
+        delTimer,
+        checkDaily,
+        uncheckDaily
     }
 })
 

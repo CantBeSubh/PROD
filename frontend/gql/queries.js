@@ -91,6 +91,21 @@ mutation($id:ID!){
 }
 `
 
+const checkDailyM = gql`
+mutation($id:ID!){
+  checkDaily(id:$id){
+    id
+  }
+}
+`
+const uncheckDailyM = gql`
+mutation($id:ID!){
+  uncheckDaily(id:$id){
+    id
+  }
+}
+`
+
 //User
 const loginQ = gql`
 query($email:String!,$password:String!){
@@ -158,5 +173,7 @@ export {
   delTimerM,
   getDailyQ,
   addDailyM,
-  delDailyM
+  delDailyM,
+  checkDailyM,
+  uncheckDailyM
 }

@@ -176,7 +176,7 @@ h6 span {
 
   outline: none;
   /* box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2); */
-  box-shadow: 0px 0px 10px grey;
+  /* box-shadow: 0px 0px 10px grey; */
 }
 .input-icon {
   position: absolute;

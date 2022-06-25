@@ -151,6 +151,32 @@ h6 span {
   box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
   box-shadow: 0px 0px 20px grey;
 }
+
+.form-style2 {
+  padding: 13px 20px;
+  padding-left: 55px;
+  height: 48px;
+  width: 100%;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  outline: none;
+  color: #c4c3ca;
+  background-color: #37394a;
+  border: none;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+}
+.form-style2:focus,
+.form-style2:active {
+  border: none;
+  outline: none;
+  /* box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2); */
+  box-shadow: 0px 0px 10px grey;
+}
 .input-icon {
   position: absolute;
   top: 0;
@@ -221,4 +247,8 @@ h6 span {
   height: 26px;
   width: auto;
   display: block;
+}
+
+.bg-smthing {
+  background-color: #484a5f;
 }

@@ -6,6 +6,9 @@ import { addTodoM, getTodosQ } from "../../gql/queries"
 
 import { useAuthContext } from '../../context/auth'
 
+import Input from '../Input2'
+
+
 const TodoForm = () => {
 
     const [todo, setTodo] = useState({ name: '', uid: auth })
@@ -24,16 +27,16 @@ const TodoForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
+        <form onSubmit={handleSubmit} className='form-group'>
+            <Input
                 label="Todo"
                 type="text"
-                name="todo"
                 value={todo.name}
                 onChange={e => setTodo({ ...todo, name: e.target.value })}
             />
 
-            <Button type="submit">+</Button>
+            <i className="input-icon uil uil-plus"></i>
+
         </form>
     )
 }

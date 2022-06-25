@@ -39,6 +39,7 @@ const Navbar = () => {
                     <Link href='/auth'><a className={styles.btn}><div>Account</div></a></Link>
             }
         </nav>
+
     )
 }
 export default Navbar;

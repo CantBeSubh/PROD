@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 
-import Button from '../Button1'
 import { addHabitM, getHabitsQ } from '../../gql/queries'
 
 import { useAuthContext } from '../../context/auth'
 
-import Input from '../Input'
+import Input from '../Input2'
 
 const HabitForm = () => {
 
@@ -28,7 +27,7 @@ const HabitForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='form-group '>
+    <form onSubmit={handleSubmit} className='form-group'>
       <Input
         label="Habit"
         type="text"
@@ -37,8 +36,6 @@ const HabitForm = () => {
       />
 
       <i className="input-icon uil uil-plus"></i>
-
-      {/* <Button type='submit'>+</Button> */}
     </form>
   )
 }

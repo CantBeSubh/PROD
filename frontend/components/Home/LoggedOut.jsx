@@ -11,15 +11,17 @@ const Logout = ({ habits, todos, dailies }) => {
   return (
     <div className={styles.formContainer}>
       <div>
-        Habit: <HabitForm />
+        <HabitForm />
         <HabitList habits={habits} />
       </div>
+      <br />
       <div>
-        Daily : <DailyForm />
+        <DailyForm />
         <DailyList dailies={dailies} />
       </div>
+      <br />
       <div>
-        Todo: <TodoForm />
+        <TodoForm />
         <TodoList todos={todos} />
       </div>
     </div>

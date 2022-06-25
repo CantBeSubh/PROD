@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client"
 
-import Button from "../Button2"
 import {
   delHabitM,
   getHabitsQ,
@@ -9,9 +8,11 @@ import {
 
 const Habit = ({ habit }) => {
 
-  const [delHabit, status] = useMutation(delHabitM, { refetchQueries: [{ query: getHabitsQ }, 'GetHabits'] })
+  const [delHabit, status] = useMutation(delHabitM,
+    { refetchQueries: [{ query: getHabitsQ }, 'GetHabits'] })
 
-  const [updateHabit, status2] = useMutation(updateHabitM, { refetchQueries: [{ query: getHabitsQ }, 'GetHabits'] })
+  const [updateHabit, status2] = useMutation(updateHabitM,
+    { refetchQueries: [{ query: getHabitsQ }, 'GetHabits'] })
 
   const handleUp = () => {
     if (status2.loading) return 'Submitting...'
@@ -43,10 +44,15 @@ const Habit = ({ habit }) => {
 
   return (
     <li>
-      {habit.name} | {habit.up} | -{habit.down}
-      <button onClick={handleUp}> + </button>
-      <button onClick={handleDown}> - </button>
-      <Button onClick={handleDel}> X </Button>
+      <span>
+        <i className="uil uil-arrow-up" onClick={handleUp} />
+        <span>{habit.up} </span>
+      </span>
+      <a onClick={handleDel}> {habit.name} </a>
+      <span>
+        <span> -{habit.down}</span>
+        <i className="uil uil-arrow-down" onClick={handleDown} />
+      </span>
     </li>
   )
 }

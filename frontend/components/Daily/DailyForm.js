@@ -5,7 +5,7 @@ import { addDailyM, getDailyQ } from '../../gql/queries'
 
 import { useAuthContext } from '../../context/auth'
 
-import Input from '../Input'
+import Input from '../Input2'
 
 
 const DailyForm = () => {

@@ -5,6 +5,8 @@
 }
 
 .formContainer {
+  width: 20%;
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
 }

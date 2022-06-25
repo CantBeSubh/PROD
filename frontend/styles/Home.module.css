@@ -1,12 +1,24 @@
 .container {
   padding: 0 2rem;
-  left: 50%;
+  left: 100%;
   top: 50%;
+}
+
+.Container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .formContainer {
   width: 20%;
-  display: flex;
   justify-content: space-around;
+  display: flex;
   flex-direction: column;
+}
+
+.image {
+  margin: auto;
+  z-index: 0;
+  /* cursor: grab; */
+  /* margin-left: 100px; */
 }

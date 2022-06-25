@@ -6,6 +6,7 @@ import '../styles/Todo.css'
 import Layout from '../components/Layout'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 import { AuthProvider } from '../context/auth'
+import { OptionsProvider } from '../context/option'
 
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
@@ -17,9 +18,11 @@ function MyApp({ Component, pageProps }) {
     <>
       <ApolloProvider client={client}>
         <AuthProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <OptionsProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </OptionsProvider>
         </AuthProvider>
       </ApolloProvider>
     </>

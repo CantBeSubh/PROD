@@ -1,10 +1,15 @@
 import TodoDue from "./TodoDue"
 import TodoDone from "./TodoDone"
 import { useState } from "react"
+
+import { useOptionsContext } from '../../context/option'
+
 const TodoList = ({ todos }) => {
+  const [options, setOptions] = useOptionsContext()
   const [show, setShow] = useState(true)
-  const [opt1, setOpt1] = useState('')
+  const [opt1, setOpt1] = useState('me')
   const [opt2, setOpt2] = useState('')
+
   return (
     <>
       <input
@@ -12,8 +17,19 @@ const TodoList = ({ todos }) => {
         type="checkbox"
         id="todo-icon"
         name="todo-icon"
+        checked={options.optionT}
+        onClick={e => {
+          setOptions({
+            optionD: false,
+            optionH: false,
+            optionT: !options.optionT
+          })
+        }}
       />
       <label htmlFor="todo-icon" />
+      <span className='tooltipT'>
+        Todos
+      </span>
       <div className="todo">
 
         <ul className="pt-5">

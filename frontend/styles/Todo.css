@@ -63,7 +63,24 @@
   transition: width 100ms ease, right 100ms ease, margin-top 100ms 500ms ease,
     transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
 }
-
+.tooltipT {
+  background-color: red;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 140px;
+  right: 175px;
+  visibility: hidden;
+}
+.todo-icon:hover ~ .tooltipT {
+  visibility: visible;
+  /* background-color: blue; */
+}
 .todo {
   position: fixed;
   top: 90px;

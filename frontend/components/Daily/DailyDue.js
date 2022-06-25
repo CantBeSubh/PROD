@@ -31,7 +31,7 @@ const DailyDue = ({ daily, show }) => {
     if (show) {
         return (
             <li>
-                <a on onClick={handleCheck}>{daily.name}</a>
+                <a onClick={handleCheck}>{daily.name}</a>
                 <span onClick={handleDel}> X </span>
             </li>
 

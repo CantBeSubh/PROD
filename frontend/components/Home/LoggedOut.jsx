@@ -24,9 +24,11 @@ const Logout = ({ habits, todos, dailies }) => {
           height={540}
           alt='logo' />
       </div>
-      <HabitList habits={habits} />
-      <DailyList dailies={dailies} />
-      <TodoList todos={todos} />
+      <div>
+        <HabitList habits={habits} />
+        <DailyList dailies={dailies} />
+        <TodoList todos={todos} />
+      </div>
     </div>
   )
 }

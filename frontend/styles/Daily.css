@@ -64,8 +64,6 @@
     transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 .tooltipD {
-  /* visibility: hidden; */
-  background-color: red;
   width: 120px;
   background-color: black;
   color: #fff;
@@ -84,6 +82,9 @@
 }
 .daily {
   position: fixed;
+  /* border-top: 1px solid white; */
+  /* border-bottom: 1px solid white; */
+  backdrop-filter: blur(10px);
   top: 90px;
   right: 115px;
   display: block;
@@ -94,7 +95,7 @@
   z-index: 9;
   overflow: hidden;
   /* box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.3); */
-  background-color: blue;
+  /* background-color: blue; */
   /* animation: border-transform 7s linear infinite; */
   transition: top 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
     right 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),

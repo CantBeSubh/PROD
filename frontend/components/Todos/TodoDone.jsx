@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client"
 import Button from "../Button2"
 import { delTodoM, getTodosQ, updateTodoM } from "../../gql/queries"
 
-const Todo = ({ todo }) => {
+const TodoDone = ({ todo, show }) => {
 
   const [delTodo, status] = useMutation(delTodoM, { refetchQueries: [{ query: getTodosQ }, 'GetTodos'] })
 
@@ -24,14 +24,14 @@ const Todo = ({ todo }) => {
     if (status.error) return `Submission error! ${status.error.message}`
     delTodo({ variables: { id: todo.id } })
   }
-
-  return (
-    <li>
-      {todo.name}
-      <input type='checkbox' checked={todo.check} onChange={handleComplete} />
-      <Button onClick={handleDel}> X </Button>
-    </li>
-  )
+  if (!show) {
+    return (
+      <li>
+        <a onClick={handleComplete}> {todo.name} </a>
+        <span onClick={handleDel}> X </span>
+      </li>
+    )
+  }
 }
 
-export default Todo
+export default TodoDone

@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client"
-import Button from "../Button2"
+// import Button from "../Button3"
 import {
     delDailyM,
     checkDailyM,
@@ -31,9 +31,8 @@ const DailyDue = ({ daily, show }) => {
     if (show) {
         return (
             <li>
-                {daily.name} | {new Date(daily.iat).toLocaleDateString()}
-                <Button onClick={handleCheck}> ✔ </Button>
-                <Button onClick={handleDel}> X </Button>
+                <a on onClick={handleCheck}>{daily.name}</a>
+                <span onClick={handleDel}> X </span>
             </li>
 
         )

@@ -29,9 +29,8 @@ const DailyDone = ({ daily, show }) => {
     if (!show) {
         return (
             <li>
-                {daily.name} | {new Date(daily.iat).toLocaleDateString()}
-                <Button onClick={handleUncheck}> 😔 </Button>
-                <Button onClick={handleDel}> X </Button>
+                <a on onClick={handleUncheck}>{daily.name}</a>
+                <span onClick={handleDel}> X </span>
             </li>
 
         )

@@ -4,13 +4,13 @@ const HabitList = ({ habits }) => {
   return (
     <>
       <input
-        className="menu-icon"
+        className="habit-icon"
         type="checkbox"
-        id="menu-icon"
-        name="menu-icon"
+        id="habit-icon"
+        name="habit-icon"
       />
-      <label htmlFor="menu-icon" />
-      <div className="nav">
+      <label htmlFor="habit-icon" />
+      <div className="habit">
         <ul className="pt-5">
           {
             habits.map(habit =>

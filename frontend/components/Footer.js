@@ -11,8 +11,6 @@ const Footer = () => {
     useEffect(() => {
         if (router.pathname === '/about') {
             setHeight('80')
-        } else {
-            setHeight('380')
         }
     }, [router])
 
@@ -40,6 +38,7 @@ const Footer = () => {
                     fullscreen; 
                     picture-in-picture"
                 />
+                <button onClick={() => setHeight(height == '80' ? '380' : '80')}> +</button>
             </footer>
         )
     }

@@ -23,6 +23,13 @@ const Logout = ({ habits, todos, dailies }) => {
           width={540}
           height={540}
           alt='logo' />
+        <br />
+        <br />
+        {/* <iframe
+          src="https://mmontag.github.io/chip-player-js/"
+          width='900rem'
+          height='500rem'
+        /> */}
       </div>
       <div>
         <HabitList habits={habits} />

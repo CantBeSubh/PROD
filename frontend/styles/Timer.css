@@ -197,4 +197,5 @@
 
 .nop {
   cursor: default;
+  text-transform: uppercase;
 }

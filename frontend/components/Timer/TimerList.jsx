@@ -1,4 +1,3 @@
-import React from 'react'
 import Timer from './Timer'
 
 const TimerList = ({ entries }) => {
@@ -11,7 +10,7 @@ const TimerList = ({ entries }) => {
                 name="timer-icon"
             />
             <label htmlFor="timer-icon" />
-            <span className='tooltipT'>
+            <span className='tooltipH'>
                 Timer
             </span>
             <div className="timer">

@@ -5,7 +5,7 @@ import TodoList from '../Todos/TodoList'
 import DailyForm from '../Daily/DailyForm'
 import DailyList from '../Daily/DailyList'
 import Image from 'next/image'
-import { PixelInterior1 } from '../../Public/Assets.js'
+import { PixelInterior1 } from '../../Public/Images'
 
 import styles from '../../styles/Home.module.css'
 

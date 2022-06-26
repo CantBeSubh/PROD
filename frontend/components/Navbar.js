@@ -30,8 +30,8 @@ const Navbar = () => {
                 </Link>
             </div>
             <Link href='/' ><div className={styles.btn}>Home</div></Link>
-            <Link href='/about' ><div className={styles.btn}>About</div></Link>
             <Link href='/timer' ><div className={styles.btn}>Timer</div></Link>
+            <Link href='/about' ><div className={styles.btn}>About</div></Link>
             {
                 auth ?
                     <div onClick={logout} className={styles.btn}>Logout</div>

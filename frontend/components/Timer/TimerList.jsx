@@ -3,13 +3,27 @@ import Timer from './Timer'
 
 const TimerList = ({ entries }) => {
     return (
-        <ol>
-            {
-                entries && entries.map(
-                    entry => <Timer entry={entry} key={entry.id} />
-                )
-            }
-        </ol>
+        <>
+            <input
+                className="timer-icon"
+                type="checkbox"
+                id="timer-icon"
+                name="timer-icon"
+            />
+            <label htmlFor="timer-icon" />
+            <span className='tooltipT'>
+                Timer
+            </span>
+            <div className="timer">
+                <ul className="pt-5">
+                    {
+                        entries.map(entry =>
+                            <Timer entry={entry} key={entry.id} />
+                        )
+                    }
+                </ul>
+            </div>
+        </>
     )
 }
 

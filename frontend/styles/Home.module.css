@@ -11,7 +11,7 @@
 
 .formContainer {
   width: 20%;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   display: flex;
   flex-direction: column;
 }
@@ -21,4 +21,32 @@
   z-index: 0;
   /* cursor: grab; */
   /* margin-left: 100px; */
+}
+
+.btn {
+  width: 69px;
+  padding: 4px 0;
+  display: flex;
+  margin: 0px 2px;
+  background: #37394a;
+  border-radius: 2px;
+  color: #c4c3ca;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 70ms linear;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  /* pointer-events: none; */
+  cursor: pointer;
+  color: #ffeba7;
+  border: 1px solid grey;
+  /* transform: translateY(-5%); */
+  /* box-shadow: 0px 0px 10px grey; */
+}
+
+.hideme {
+  visibility: hidden;
 }

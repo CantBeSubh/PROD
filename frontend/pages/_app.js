@@ -3,6 +3,7 @@ import '../styles/Auth.css'
 import '../styles/Habit.css'
 import '../styles/Daily.css'
 import '../styles/Todo.css'
+import '../styles/Timer.css'
 import Layout from '../components/Layout'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 import { AuthProvider } from '../context/auth'

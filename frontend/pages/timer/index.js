@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
-import { addTimerM, getTimersQ } from '../../gql/queries'
-import { useAuthContext } from '../../context/auth'
-import TimerList from '../../components/Timer/TimerList'
-import { spitTime } from '../../utils/SpitTime'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
+
+import { addTimerM, getTimersQ } from '../../gql/queries'
+
+import { useAuthContext } from '../../context/auth'
+
+import TimerList from '../../components/Timer/TimerList'
+import Input from '../../components/Input2'
+import { spitTime } from '../../utils/SpitTime'
+
+import styles from '../../styles/Home.module.css'
 
 
 const index = () => {
     const router = useRouter()
-    const [auth, setAuth] = useAuthContext()
+    const [auth] = useAuthContext()
     useEffect(() => {
         if (!auth) {
             setTimeout(() => router.push('/auth'), 500)
@@ -37,7 +44,12 @@ const index = () => {
 
     useEffect(() => {
         if (entry.start && entry.end && entry.isPaused) {
-            const l = { ...entry, uid: auth, start: entry.start.toString(), end: entry.end.toString() }
+            const l = {
+                ...entry,
+                uid: auth,
+                start: entry.start.toString(),
+                end: entry.end.toString()
+            }
             delete l.isPaused
             addTimer({ variables: l })
             setEntry({
@@ -50,7 +62,6 @@ const index = () => {
             })
         }
     }, [entry])
-
 
     const handleStart = () => {
         let current = 0
@@ -71,34 +82,80 @@ const index = () => {
 
 
     return (
-        <div className='p-5'>
-            <form>
-                <input
-                    placeholder='name'
-                    type='text'
-                    value={entry.name}
-                    onChange={e => setEntry({ ...entry, name: e.target.value })}
-                    autoComplete='off'
-                />
-                <input
-                    placeholder='genre'
-                    type='text'
-                    value={entry.genre}
-                    onChange={e => setEntry({ ...entry, genre: e.target.value })}
-                />
-                <input
-                    placeholder='category'
-                    type='text'
-                    value={entry.category}
-                    onChange={e => setEntry({ ...entry, category: e.target.value })}
-                />
-                {entry.isPaused && <button onClick={handleStart}>+</button>}
-                {!entry.isPaused && <button onClick={handleStop}>X</button>}
-            </form>
+        <div className={styles.container}>
+            <div className='App'>
+                <div className={styles.Container}>
+                    <form className={styles.formContainer}>
+                        <div className='form-group'>
 
-            {!entry.isPaused && `Start timer = ${spitTime(timer)}`}
+                            <Input
+                                label='Name'
+                                type='text'
+                                value={entry.name}
+                                onChange={e => setEntry({ ...entry, name: e.target.value })}
+                            />
+                            <i className="input-icon uil uil-plus"></i>
+                        </div>
 
-            {entries && <TimerList entries={entries} />}
+                        <br />
+
+                        <div className='form-group '>
+
+                            <Input
+                                label='Genre'
+                                type='text'
+                                value={entry.genre}
+                                onChange={e => setEntry({ ...entry, genre: e.target.value })}
+                            />
+                            <i className="input-icon uil uil-plus"></i>
+                        </div>
+
+                        <br />
+
+                        <div className='form-group'>
+
+                            <Input
+                                label='Category'
+                                type='text'
+                                value={entry.category}
+                                onChange={e => setEntry({ ...entry, category: e.target.value })}
+                            />
+                            <i className="input-icon uil uil-plus"></i>
+                        </div>
+
+                        <br />
+
+                        {
+                            entry.isPaused &&
+                            <button
+                                className={styles.hideme}
+                                onClick={handleStart}
+                            />
+                        }
+
+                        {
+                            !entry.isPaused &&
+                            `${spitTime(timer)}`
+                        }
+                        {
+                            !entry.isPaused &&
+                            <div
+                                className={styles.btn}
+                                onClick={handleStop}>||
+                            </div>
+                        }
+                    </form>
+
+                    <div className={styles.image}>
+                        <Image src='/Pixel.png'
+                            width={540}
+                            height={540}
+                            alt='logo' />
+                    </div>
+
+                    <TimerList entries={entries} />
+                </div>
+            </div>
         </div>
     )
 }

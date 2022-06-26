@@ -11,7 +11,7 @@ import styles from '../../styles/Home.module.css'
 const Logout = ({ habits, todos, dailies }) => {
   return (
     <div className={styles.Container}>
-      <div className={StyleSheet.formContainer}>
+      <div className={styles.formContainer}>
         <HabitForm />
         <br />
         <DailyForm />

@@ -38,7 +38,24 @@ const Footer = () => {
                     fullscreen; 
                     picture-in-picture"
                 />
-                <button onClick={() => setHeight(height == '80' ? '380' : '80')}> +</button>
+                <span
+                    onClick={() => {
+                        if (height == '80') {
+                            for (let i = 81; i < 381; i++) {
+                                setTimeout(() => { setHeight(i) }, 100)
+                            }
+                        } else {
+                            for (let i = 379; i > 79; i--) {
+                                setTimeout(() => { setHeight(i) }, 100)
+                            }
+                        }
+                    }
+                    }
+                >
+                    {
+                        height == '80' ? '+' : '-'
+                    }
+                </span>
             </footer>
         )
     }

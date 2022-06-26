@@ -5,6 +5,7 @@ import TodoList from '../Todos/TodoList'
 import DailyForm from '../Daily/DailyForm'
 import DailyList from '../Daily/DailyList'
 import Image from 'next/image'
+import { PixelInterior1 } from '../../Public/Assets.js'
 
 import styles from '../../styles/Home.module.css'
 
@@ -19,9 +20,11 @@ const Logout = ({ habits, todos, dailies }) => {
         <TodoForm />
       </div>
       <div className={styles.image}>
-        <Image src='/Pixel.png'
-          width={540}
-          height={540}
+        <Image
+          src={PixelInterior1}
+          width={1920 / 2}
+          height={1080 / 2}
+          // layoyt='fill'
           alt='logo' />
         <br />
         <br />

@@ -4,7 +4,6 @@
   "description": "Server for PROD",
   "main": "index.js",
   "scripts": {
-    "prestart": "clear",
     "start": "nodemon app.js"
   },
   "dependencies": {

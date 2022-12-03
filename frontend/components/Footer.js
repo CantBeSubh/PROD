@@ -27,7 +27,8 @@ const Footer = () => {
                 <iframe
                     className="player"
                     style={{ borderRadius: '12px' }}
-                    src="https://open.spotify.com/embed/playlist/0vvXsWCC9xrXsKd4FyS8kM?utm_source=generator&theme=0"
+                    // src="https://open.spotify.com/embed/playlist/0vvXsWCC9xrXsKd4FyS8kM?utm_source=generator&theme=0"
+                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DX5trt9i14X7j?utm_source=generator"
                     width="30%"
                     height={height}
                     frameBorder="0"

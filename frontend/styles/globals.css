@@ -22,6 +22,10 @@ body {
   /* background-position: center; */
   /* background-repeat: repeat; */
   /* background-size: 4%; */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 a {
@@ -66,4 +70,30 @@ footer {
   margin: 30px;
   color: #555;
   /* border-top: 1px solid #777; */
+}
+
+.btn_add {
+  width: 69px;
+  padding: 4px;
+  /* margin: 0px 2px; */
+  margin-left: 10px;
+  background: #1f2029;
+  border-radius: 2px;
+  color: #c4c3ca;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 70ms linear;
+  border: 1px solid #ffeba7;
+}
+
+.btn_add:hover {
+  /* pointer-events: none; */
+  cursor: pointer;
+  color: #ffeba7;
+  border: 1px solid #ffeba7;
+  box-shadow: 0px 0px 10px grey;
+}
+
+.btn_add:active {
+  box-shadow: 0px 1px 5px grey;
 }

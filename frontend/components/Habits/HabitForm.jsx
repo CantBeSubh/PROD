@@ -36,6 +36,7 @@ const HabitForm = () => {
       />
 
       <i className="input-icon uil uil-plus"></i>
+      <button type="submit" className='btn_add'>Add</button>
     </form>
   )
 }

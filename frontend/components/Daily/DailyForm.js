@@ -32,7 +32,7 @@ const DailyForm = () => {
             />
 
             <i className="input-icon uil uil-plus"></i>
-
+            <button type="submit" className='btn_add'>Add</button>
             {/* <Button type='submit'>+</Button> */}
         </form>
     )

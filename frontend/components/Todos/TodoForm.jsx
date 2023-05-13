@@ -36,7 +36,7 @@ const TodoForm = () => {
             />
 
             <i className="input-icon uil uil-plus"></i>
-
+            <button type="submit" className='btn_add'>Add</button>
         </form>
     )
 }

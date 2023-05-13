@@ -1,5 +1,5 @@
-.habit-icon:checked + label,
-.habit-icon:not(:checked) + label {
+.habit-icon:checked+label,
+.habit-icon:not(:checked)+label {
   position: fixed;
   top: 103px;
   right: 75px;
@@ -11,8 +11,9 @@
   cursor: pointer;
   z-index: 10;
 }
-.habit-icon:checked + label:before,
-.habit-icon:not(:checked) + label:before {
+
+.habit-icon:checked+label:before,
+.habit-icon:not(:checked)+label:before {
   position: absolute;
   content: "";
   display: block;
@@ -28,8 +29,9 @@
     height 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1),
     background-color 200ms ease, transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
 }
-.habit-icon:checked + label:after,
-.habit-icon:not(:checked) + label:after {
+
+.habit-icon:checked+label:after,
+.habit-icon:not(:checked)+label:after {
   position: absolute;
   content: "";
   display: block;
@@ -43,7 +45,8 @@
   transition: width 100ms 1750ms ease, right 100ms 1750ms ease,
     margin-top 100ms ease, transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
 }
-.habit-icon:checked + label:before {
+
+.habit-icon:checked+label:before {
   top: 10px;
   transform: rotate(45deg);
   height: 2px;
@@ -55,7 +58,8 @@
     background-color 200ms 500ms ease,
     transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
 }
-.habit-icon:checked + label:after {
+
+.habit-icon:checked+label:after {
   width: 30px;
   margin-top: 0;
   right: 0;
@@ -63,6 +67,7 @@
   transition: width 100ms ease, right 100ms ease, margin-top 100ms 500ms ease,
     transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
 }
+
 .tooltipH {
   width: 120px;
   background-color: black;
@@ -76,10 +81,12 @@
   right: 85px;
   visibility: hidden;
 }
-.habit-icon:hover ~ .tooltipH {
+
+.habit-icon:hover~.tooltipH {
   visibility: visible;
   /* background-color: blue; */
 }
+
 .habit {
   /* border: 1px solid white; */
   /* border-left: none; */
@@ -105,7 +112,7 @@
     background-color 750ms 1000ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.habit-icon:checked ~ .habit {
+.habit-icon:checked~.habit {
   animation-play-state: paused;
   top: 50%;
   right: 50%;
@@ -133,6 +140,7 @@
   transform: translateY(-50%);
   list-style: none;
 }
+
 .habit ul li {
   position: relative;
   display: block;
@@ -151,6 +159,7 @@
 .habit ul li i {
   cursor: pointer;
 }
+
 .habit ul li i,
 .habit ul li a {
   font-family: "Montserrat", sans-serif;
@@ -163,10 +172,12 @@
   color: #eceece;
   transition: all 250ms linear;
 }
+
 .habit ul li a:hover {
   text-decoration: none;
   color: #ffeba7;
 }
+
 .habit ul li a:after {
   display: block;
   position: absolute;
@@ -180,20 +191,23 @@
   opacity: 0.8;
   transition: width 250ms linear;
 }
+
 .habit ul li a:hover:after {
   width: 100%;
 }
 
-.habit-icon:checked ~ .habit ul li {
+.habit-icon:checked~.habit ul li {
   pointer-events: auto;
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
   transition: opacity 350ms ease, transform 250ms ease;
 }
-.habit-icon:checked ~ .habit ul li {
+
+.habit-icon:checked~.habit ul li {
   transition-delay: 1400ms;
 }
+
 /* .habit-icon:checked ~ .nav ul li:nth-child(2) {
   transition-delay: 1480ms;
 }

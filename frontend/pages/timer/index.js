@@ -73,6 +73,11 @@ const index = () => {
         }, 1000))
     }
 
+    const handlePause = () => {
+        clearInterval(id)
+        setEntry({ ...entry, end: new Date(), isPaused: true })
+    }
+
     const handleStop = () => {
         clearInterval(id)
         setEntry({ ...entry, end: new Date(), isPaused: true })
@@ -128,9 +133,9 @@ const index = () => {
                         {
                             entry.isPaused &&
                             <button
-                                className={styles.hideme}
+                                className="btn_add"
                                 onClick={handleStart}
-                            />
+                            >Start</button>
                         }
 
                         {
@@ -141,7 +146,14 @@ const index = () => {
                             !entry.isPaused &&
                             <div
                                 className={styles.btn}
-                                onClick={handleStop}>||
+                                onClick={handlePause}>||
+                            </div>
+                        }
+                        {
+                            !entry.isPaused &&
+                            <div
+                                className={styles.btn}
+                                onClick={handleStop}>Stop
                             </div>
                         }
                     </form>

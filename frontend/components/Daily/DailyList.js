@@ -34,8 +34,9 @@ const DailyList = ({ dailies }) => {
                 Dailies
             </span>
             <div className="daily">
-
                 <ul className="pt-5">
+                    <h1>DAILIES</h1>
+
                     <div
                         className={`btn ${opt1}`}
                         onClick={() => {

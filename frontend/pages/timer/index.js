@@ -43,24 +43,24 @@ const index = () => {
     }, [getTimers])
 
     useEffect(() => {
-        if (entry.start && entry.end && entry.isPaused) {
-            const l = {
-                ...entry,
-                uid: auth,
-                start: entry.start.toString(),
-                end: entry.end.toString()
-            }
-            delete l.isPaused
-            addTimer({ variables: l })
-            setEntry({
-                name: '',
-                genre: '',
-                category: '',
-                start: null,
-                end: null,
-                isPaused: true
-            })
-        }
+        // if (entry.start && entry.end && entry.isPaused) {
+        //     const l = {
+        //         ...entry,
+        //         uid: auth,
+        //         start: entry.start.toString(),
+        //         end: entry.end.toString()
+        //     }
+        //     delete l.isPaused
+        //     addTimer({ variables: l })
+        //     setEntry({
+        //         name: '',
+        //         genre: '',
+        //         category: '',
+        //         start: null,
+        //         end: null,
+        //         isPaused: true
+        //     })
+        // }
     }, [entry])
 
     const handleStart = () => {
@@ -83,6 +83,24 @@ const index = () => {
         setEntry({ ...entry, end: new Date(), isPaused: true })
         setTimer(0)
         setId('')
+        if (entry.start && entry.end && entry.isPaused) {
+            const l = {
+                ...entry,
+                uid: auth,
+                start: entry.start.toString(),
+                end: entry.end.toString()
+            }
+            delete l.isPaused
+            addTimer({ variables: l })
+            setEntry({
+                name: '',
+                genre: '',
+                category: '',
+                start: null,
+                end: null,
+                isPaused: true
+            })
+        }
     }
 
 
@@ -132,14 +150,15 @@ const index = () => {
 
                         {
                             entry.isPaused &&
+
                             <button
                                 className="btn_add"
                                 onClick={handleStart}
-                            >Start</button>
+                            >{entry.start ? "Resume" : "Start"}</button>
                         }
 
                         {
-                            !entry.isPaused &&
+                            !entry.isPaused || (entry.isPaused && entry.start && entry.end) &&
                             `${spitTime(timer)}`
                         }
                         {

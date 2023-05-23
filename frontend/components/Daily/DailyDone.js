@@ -30,7 +30,7 @@ const DailyDone = ({ daily, show }) => {
         return (
             <li>
                 <a on onClick={handleUncheck}>{daily.name}</a>
-                <span onClick={handleDel}> X </span>
+                <span onClick={handleDel} className="X"> X </span>
             </li>
 
         )

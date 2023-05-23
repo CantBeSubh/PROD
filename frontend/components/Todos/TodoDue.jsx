@@ -28,7 +28,7 @@ const TodoDue = ({ todo, show }) => {
     return (
       <li>
         <a onClick={handleComplete}> {todo.name} </a>
-        <span onClick={handleDel}> X </span>
+        <span onClick={handleDel} className="X"> X </span>
       </li>
     )
   }

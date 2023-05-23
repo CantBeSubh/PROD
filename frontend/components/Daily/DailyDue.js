@@ -32,7 +32,7 @@ const DailyDue = ({ daily, show }) => {
         return (
             <li>
                 <a onClick={handleCheck}>{daily.name}</a>
-                <span onClick={handleDel}> X </span>
+                <span onClick={handleDel} className="X"> X </span>
             </li>
 
         )

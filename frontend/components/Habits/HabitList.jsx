@@ -27,6 +27,8 @@ const HabitList = ({ habits }) => {
       </span>
       <div className="habit">
         <ul className="pt-5">
+          <h1>HABITS</h1>
+
           {
             habits.map(habit =>
               <Habit

@@ -15,6 +15,8 @@ const TimerList = ({ entries }) => {
             </span>
             <div className="timer">
                 <ul className="pt-5">
+                    <h1>TIMER</h1>
+
                     {
                         entries.map(entry =>
                             <Timer entry={entry} key={entry.id} />

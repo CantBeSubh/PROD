@@ -33,6 +33,8 @@ const TodoList = ({ todos }) => {
       <div className="todo">
 
         <ul className="pt-5">
+          <h1>TODOS</h1>
+
           <div
             className={`btn ${opt1}`}
             onClick={() => {
@@ -51,7 +53,7 @@ const TodoList = ({ todos }) => {
           </div>
           {
             todos.map(todo => {
-              if (todo.check) {
+              if (!todo.check) {
                 return <TodoDue
                   key={todo.id}
                   todo={todo}

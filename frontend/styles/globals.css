@@ -97,3 +97,7 @@ footer {
 .btn_add:active {
   box-shadow: 0px 1px 5px grey;
 }
+
+.X:hover {
+  color: red;
+}

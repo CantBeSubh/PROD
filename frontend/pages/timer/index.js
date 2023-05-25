@@ -43,46 +43,6 @@ const index = () => {
     }, [getTimers])
 
     useEffect(() => {
-        // if (entry.start && entry.end && entry.isPaused) {
-        //     const l = {
-        //         ...entry,
-        //         uid: auth,
-        //         start: entry.start.toString(),
-        //         end: entry.end.toString()
-        //     }
-        //     delete l.isPaused
-        //     addTimer({ variables: l })
-        //     setEntry({
-        //         name: '',
-        //         genre: '',
-        //         category: '',
-        //         start: null,
-        //         end: null,
-        //         isPaused: true
-        //     })
-        // }
-    }, [entry])
-
-    const handleStart = () => {
-        let current = 0
-        setEntry({ ...entry, end: null, start: new Date(), isPaused: false })
-        setTimer(0)
-        setId(setInterval(() => {
-            current += 1000
-            setTimer(current)
-        }, 1000))
-    }
-
-    const handlePause = () => {
-        clearInterval(id)
-        setEntry({ ...entry, end: new Date(), isPaused: true })
-    }
-
-    const handleStop = () => {
-        clearInterval(id)
-        setEntry({ ...entry, end: new Date(), isPaused: true })
-        setTimer(0)
-        setId('')
         if (entry.start && entry.end && entry.isPaused) {
             const l = {
                 ...entry,
@@ -101,6 +61,23 @@ const index = () => {
                 isPaused: true
             })
         }
+    }, [entry])
+
+    const handleStart = () => {
+        let current = 0
+        setEntry({ ...entry, end: null, start: new Date(), isPaused: false })
+        setTimer(0)
+        setId(setInterval(() => {
+            current += 1000
+            setTimer(current)
+        }, 1000))
+    }
+
+    const handleStop = () => {
+        clearInterval(id)
+        setEntry({ ...entry, end: new Date(), isPaused: true })
+        setTimer(0)
+        setId('')
     }
 
 
@@ -150,29 +127,21 @@ const index = () => {
 
                         {
                             entry.isPaused &&
-
                             <button
-                                className="btn_add"
+                                className={styles.hideme}
                                 onClick={handleStart}
-                            >{entry.start ? "Resume" : "Start"}</button>
+                            />
                         }
 
                         {
-                            !entry.isPaused || (entry.isPaused && entry.start && entry.end) &&
+                            !entry.isPaused &&
                             `${spitTime(timer)}`
                         }
                         {
                             !entry.isPaused &&
                             <div
                                 className={styles.btn}
-                                onClick={handlePause}>||
-                            </div>
-                        }
-                        {
-                            !entry.isPaused &&
-                            <div
-                                className={styles.btn}
-                                onClick={handleStop}>Stop
+                                onClick={handleStop}>||
                             </div>
                         }
                     </form>

@@ -128,9 +128,9 @@ const index = () => {
                         {
                             entry.isPaused &&
                             <button
-                                className={styles.hideme}
+                                className={styles.btn}
                                 onClick={handleStart}
-                            />
+                            >Start</button>
                         }
 
                         {

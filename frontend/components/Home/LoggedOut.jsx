@@ -20,6 +20,7 @@ const Logout = ({ habits, todos, dailies }) => {
         <TodoForm />
       </div>
       <div className={styles.image}>
+        {/* R3F Isometric home */}
         <Image
           src={PixelInterior2}
           width={1080 / 2}
